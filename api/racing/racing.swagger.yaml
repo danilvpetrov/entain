@@ -1,0 +1,92 @@
+swagger: "2.0"
+info:
+  title: api/racing/racing.proto
+  version: version not set
+tags:
+  - name: Racing
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/races:
+    get:
+      summary: ListRaces returns a list of all races. It can be filtered by meeting IDs.
+      operationId: Racing_ListRaces
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/racingListRacesResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: meetingId
+          description: MeetingId is an optional list of meeting IDs to filter the races.
+          in: query
+          required: false
+          type: array
+          items:
+            type: string
+            format: int64
+          collectionFormat: multi
+      tags:
+        - Racing
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  racingListRacesResponse:
+    type: object
+    properties:
+      races:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/racingRace'
+        description: Races is a list of horse racing events.
+    description: ListRacesResponse represents a response to the ListRaces call.
+  racingRace:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: ID represents a unique identifier for the race.
+      meetingId:
+        type: string
+        format: int64
+        description: MeetingID represents a unique identifier for the races meeting.
+      name:
+        type: string
+        description: Name is the official name given to the race.
+      number:
+        type: string
+        format: int64
+        description: Number represents the number of the race.
+      visible:
+        type: boolean
+        description: Visible represents whether or not the race is visible.
+      advertisedStartTime:
+        type: string
+        format: date-time
+        description: AdvertisedStartTime is the time the race is advertised to run.
+    description: Race represents a horse racing event.
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/protobufAny'

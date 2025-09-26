@@ -1,0 +1,45 @@
+syntax = "proto3";
+package racing;
+
+option go_package = "github.com/danilvpetrov/entain/api/racing";
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+// Racing service provides operations for managing horse racing events.
+service Racing {
+  // ListRaces returns a list of all races. It can be filtered by meeting IDs.
+  rpc ListRaces(ListRacesRequest) returns (ListRacesResponse) {
+    option (google.api.http) = {
+      get : "/v1/races"
+    };
+  }
+}
+
+// ListRacesRequest represents a request for the ListRaces call.
+message ListRacesRequest {
+  // MeetingId is an optional list of meeting IDs to filter the races.
+  repeated int64 meeting_id = 1;
+}
+
+// ListRacesResponse represents a response to the ListRaces call.
+message ListRacesResponse {
+  // Races is a list of horse racing events.
+  repeated Race races = 1;
+}
+
+// Race represents a horse racing event.
+message Race {
+  // ID represents a unique identifier for the race.
+  int64 id = 1;
+  // MeetingID represents a unique identifier for the races meeting.
+  int64 meeting_id = 2;
+  // Name is the official name given to the race.
+  string name = 3;
+  // Number represents the number of the race.
+  int64 number = 4;
+  // Visible represents whether or not the race is visible.
+  bool visible = 5;
+  // AdvertisedStartTime is the time the race is advertised to run.
+  google.protobuf.Timestamp advertised_start_time = 6;
+}
