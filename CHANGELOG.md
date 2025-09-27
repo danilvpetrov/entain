@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.3.0] - 2025-09-27
+
+### Added
+
+- Added ordering functionality to the `ListRaces` RPC in the racing service,
+  allowing clients to specify the order of returned races. For more details,
+  please refer to [race ordering in README.md](./README.md#ordering-of-races).
+
 ## [v0.2.1] - 2025-09-27
 
 ### Fixed
@@ -35,7 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved code structure and organization
 - Added Makefile for building and running the services
 
-[unreleased]: https://github.com/danilvpetrov/entain/compare/v0.2.1...HEAD
+[unreleased]: https://github.com/danilvpetrov/entain/compare/v0.3.0...HEAD
+[v0.3.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.3.0
 [v0.2.1]: https://github.com/danilvpetrov/entain/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.2.0
 [v0.1.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.1.0
