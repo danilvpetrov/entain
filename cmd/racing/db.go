@@ -11,16 +11,16 @@ import (
 
 var (
 	racingDBPath        = os.Getenv("RACING_DB_PATH")
-	defaultRacingDBPath = "artifacts/racing.db"
+	defaultRacingDBPath = "artefacts/racing.db"
 )
 
-// setupDB initializes the database connection and applies the necessary schema.
+// setupDB initialises the database connection and applies the necessary schema.
 func setupDB(ctx context.Context) (*sql.DB, error) {
 	if racingDBPath == "" {
 		racingDBPath = defaultRacingDBPath
-		// Make sure the artifacts directory exists if we are using the default
+		// Make sure the artefacts directory exists if we are using the default
 		// path.
-		if err := os.MkdirAll("artifacts", os.ModePerm); err != nil {
+		if err := os.MkdirAll("artefacts", os.ModePerm); err != nil {
 			return nil, err
 		}
 	}

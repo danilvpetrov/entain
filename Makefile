@@ -31,3 +31,10 @@ run-gateway:
 .PHONY: run-racing
 run-racing:
 	go run ./cmd/racing
+
+
+.PHONY: precommit
+precommit: generate test
+	go mod tidy
+	betteralign --apply -test_files ./...
+	golangci-lint run --fix ./...

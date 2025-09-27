@@ -12,7 +12,7 @@ import (
 
 var (
 	racingServiceAddr        = os.Getenv("RACING_SERVICE_ADDR")
-	defaultRacingServiceAddr = ":9000"
+	defaultRacingServiceAddr = "localhost:9000"
 )
 
 // setupRacingService sets up the gRPC gateway for the Racing service, allowing

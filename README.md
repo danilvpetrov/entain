@@ -98,7 +98,7 @@ make run-racing
 The following environment variables can be used to configure the gateway:
 
 - `LISTEN_ADDR` - address to listen on (default: `:9000`)
-- `RACING_DB_PATH` - path to the racing database (default: `artifacts/racing.db`)
+- `RACING_DB_PATH` - path to the racing database (default: `artefacts/racing.db`)
 - `DEBUG` - enable debug logging (default: `false`)
 
 ### Calling the service through API Gateway

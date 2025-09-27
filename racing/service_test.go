@@ -15,13 +15,13 @@ func TestListRaces(t *testing.T) {
 	client := setupServer(t, s)
 
 	cases := []struct {
-		name      string
-		req       *apiracing.ListRacesRequest
 		assertion func(
 			t *testing.T,
 			resp *apiracing.ListRacesResponse,
 			err error,
 		)
+		req  *apiracing.ListRacesRequest
+		name string
 	}{
 		{
 			name: "no filter",

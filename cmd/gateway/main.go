@@ -31,7 +31,7 @@ func run() error {
 		return fmt.Errorf("error setting up API: %w", err)
 	}
 
-	svr, listener, err := setupServer(mux)
+	svr, listener, err := setupServer(ctx, mux)
 	if err != nil {
 		return fmt.Errorf("error setting up server: %w", err)
 	}

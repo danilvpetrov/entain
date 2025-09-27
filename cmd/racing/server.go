@@ -1,8 +1,10 @@
 package main
 
 import (
+	"context"
 	"net"
 	"os"
+	"time"
 
 	racingapi "github.com/danilvpetrov/entain/api/racing"
 	"github.com/danilvpetrov/entain/racing"
@@ -11,11 +13,14 @@ import (
 
 var (
 	serverAddr        = os.Getenv("LISTEN_ADDR")
-	defaultServerAddr = ":9000"
+	defaultServerAddr = "localhost:9000"
 )
 
 // setupServer sets up and returns a gRPC server along with its listener.
-func setupServer(s *racing.Service) (*grpc.Server, net.Listener, error) {
+func setupServer(
+	ctx context.Context,
+	s *racing.Service,
+) (*grpc.Server, net.Listener, error) {
 	server := grpc.NewServer()
 	racingapi.RegisterRacingServer(server, s)
 
@@ -23,7 +28,11 @@ func setupServer(s *racing.Service) (*grpc.Server, net.Listener, error) {
 		serverAddr = defaultServerAddr
 	}
 
-	listener, err := net.Listen("tcp", serverAddr)
+	listenConfig := net.ListenConfig{
+		KeepAlive: 5 * time.Minute,
+	}
+
+	listener, err := listenConfig.Listen(ctx, "tcp", serverAddr)
 	if err != nil {
 		return nil, nil, err
 	}

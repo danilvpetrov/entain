@@ -1,0 +1,99 @@
+version: "2"
+linters:
+  default: none
+  enable:
+    - bodyclose
+    - dogsled
+    - errcheck
+    - errorlint
+    - funlen
+    - gocheckcompilerdirectives
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - goprintffuncname
+    - gosec
+    - govet
+    - mnd
+    - misspell
+    - intrange
+    - ineffassign
+    - lll
+    - nakedret
+    - noctx
+    - nolintlint
+    - prealloc
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - staticcheck
+    - testifylint
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+  settings:
+    funlen:
+      lines: 100
+      statements: 50
+    gocritic:
+      disabled-checks:
+        - dupImport
+      enabled-tags:
+        - diagnostic
+        - opinionated
+        - performance
+        - style
+    mnd:
+      # don't include the "operation" and "assign"
+      checks:
+        - case
+        - condition
+        - return
+    govet:
+      enable:
+        - fieldalignment
+    errorlint:
+      asserts: false
+    lll:
+      line-length: 140
+    misspell:
+      locale: UK
+    nolintlint:
+      allow-unused: false # report any unused nolint directives
+      require-explanation: true # require an explanation for nolint directives
+      require-specific: true # require nolint directives to be specific about which linter is being skipped
+    revive:
+      rules:
+        - name: indent-error-flow
+        - name: unexported-return
+          disabled: true
+        - name: unused-parameter
+        - name: unused-receiver
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - bodyclose
+          - funlen
+        path: _test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

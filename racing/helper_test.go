@@ -49,8 +49,9 @@ func setupServer(
 	server := grpc.NewServer()
 	racingapi.RegisterRacingServer(server, s)
 
+	listenCfg := net.ListenConfig{}
 	// Listen on a random port.
-	l, err := net.Listen("tcp", ":0")
+	listener, err := listenCfg.Listen(t.Context(), "tcp", "localhost:0")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -58,11 +59,11 @@ func setupServer(
 	t.Cleanup(server.GracefulStop)
 
 	go func() {
-		_ = server.Serve(l)
+		_ = server.Serve(listener)
 	}()
 
 	conn, err := grpc.NewClient(
-		l.Addr().String(),
+		listener.Addr().String(),
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {

@@ -8,11 +8,14 @@ import (
 	"syreclabs.com/go/faker"
 )
 
-const NumberOfSeededRaces = 100
+const (
+	// NumberOfSeededRaces defines how many races are seeded in the database.
+	NumberOfSeededRaces = 100
+)
 
 // SeedTestData seeds the database with test data.
-// This function is intended to be used in tests only. Pease avoid using it
-// in a production setup.
+// This function is intended to be used in tests only. Please avoid using it
+// in a production setupp.
 func SeedTestData(ctx context.Context, db *sql.DB) error {
 	for i := range NumberOfSeededRaces {
 		if _, err := db.ExecContext(

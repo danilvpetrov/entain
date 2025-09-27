@@ -37,7 +37,7 @@ func run() error {
 	}()
 
 	service := setupService(db)
-	svr, listener, err := setupServer(service)
+	svr, listener, err := setupServer(ctx, service)
 	if err != nil {
 		return fmt.Errorf("error setting up server: %w", err)
 	}

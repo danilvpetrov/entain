@@ -3,6 +3,7 @@ package racing
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"log/slog"
 	"strings"
 	"time"
@@ -31,7 +32,8 @@ func (s *Service) ListRaces(
 
 	rows, err := s.DB.QueryContext(
 		ctx,
-		`SELECT
+		fmt.Sprintf(
+			`SELECT
 			id,
 			meeting_id,
 			name,
@@ -39,8 +41,8 @@ func (s *Service) ListRaces(
 			visible,
 			advertised_start_time
 		 FROM races
-		 WHERE id <> 0
-		 `+filterQuery,
+		 WHERE id <> 0 %s`,
+			filterQuery),
 		args...,
 	)
 	if err != nil {
@@ -85,11 +87,8 @@ func (s *Service) ListRaces(
 // filter object.
 func parseFilter(
 	req *racingapi.ListRacesRequest,
-) (string, []any) {
-	var (
-		w    strings.Builder
-		args []any
-	)
+) (filter string, args []any) {
+	var w strings.Builder
 
 	if len(req.GetMeetingId()) > 0 {
 		_, _ = w.WriteString("AND meeting_id IN (")
