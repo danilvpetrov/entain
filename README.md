@@ -221,3 +221,11 @@ The commits on this branch should be merged into the `main` branch.
 The changes related to this task can be traced at the branch
 [`race-status`](https://github.com/danilvpetrov/entain/tree/race-status).
 The commits on this branch should be merged into the `main` branch.
+
+### Task 4
+
+> Introduce a new RPC, that allows us to fetch a single race by its ID.
+
+The changes related to this task can be traced at the branch
+[`get-race-rpc`](https://github.com/danilvpetrov/entain/tree/get-race-rpc).
+The commits on this branch should be merged into the `main` branch.
