@@ -3,12 +3,13 @@ package racing_test
 import (
 	"slices"
 	"testing"
+	"time"
 
 	apiracing "github.com/danilvpetrov/entain/api/racing"
 	. "github.com/danilvpetrov/entain/racing"
 )
 
-func TestListRaces(t *testing.T) {
+func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 	s := &Service{
 		DB: setupDatabase(t),
 	}
@@ -79,6 +80,281 @@ func TestListRaces(t *testing.T) {
 					if !race.GetVisible() {
 						t.Errorf("expected race %+v to be visible", race)
 					}
+				}
+			},
+		},
+		{
+			name: "ordered by an advertised start time ascending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_ADVERTISED_START_TIME_ASC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				var lastAdvertisedTime time.Time
+				for _, race := range resp.GetRaces() {
+					actual := race.GetAdvertisedStartTime().AsTime()
+					if actual.Before(lastAdvertisedTime) {
+						t.Fatalf(
+							"expected advertised start time to be in ascending order, "+
+								"got %v before %v, race %+v",
+							actual,
+							lastAdvertisedTime,
+							race,
+						)
+					}
+					lastAdvertisedTime = actual
+				}
+			},
+		},
+		{
+			name: "ordered by an advertised start time descending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_ADVERTISED_START_TIME_DESC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				// Initialise to a time in the far future.
+				lastAdvertisedTime := time.Now().AddDate(1000, 0, 0)
+				for _, race := range resp.GetRaces() {
+					actual := race.GetAdvertisedStartTime().AsTime()
+					if actual.After(lastAdvertisedTime) {
+						t.Fatalf(
+							"expected advertised start time to be in descending order, "+
+								"got %v after %v, race %+v",
+							actual,
+							lastAdvertisedTime,
+							race,
+						)
+					}
+					lastAdvertisedTime = actual
+				}
+			},
+		},
+		{
+			name: "ordered by meeting ID ascending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_MEETING_ID_ASC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				var lastMeetingID int64
+				for _, race := range resp.GetRaces() {
+					if race.GetMeetingId() < lastMeetingID {
+						t.Errorf(
+							"expected meeting ID to be in ascending order, got %d before %d, race %+v",
+							race.GetMeetingId(),
+							lastMeetingID,
+							race,
+						)
+					}
+					lastMeetingID = race.GetMeetingId()
+				}
+			},
+		},
+		{
+			name: "ordered by meeting ID descending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_MEETING_ID_DESC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				var lastMeetingID int64 = 1_000_000_000
+				for _, race := range resp.GetRaces() {
+					if race.GetMeetingId() > lastMeetingID {
+						t.Errorf("expected meeting ID to be in descending "+
+							"order, got %d after %d, race %+v",
+							race.GetMeetingId(), lastMeetingID, race)
+					}
+					lastMeetingID = race.GetMeetingId()
+				}
+			},
+		},
+		{
+			name: "oder by name ascending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_NAME_ASC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				var name string
+				for _, race := range resp.GetRaces() {
+					actual := race.GetName()
+					if actual < name {
+						t.Errorf(
+							"expected name to be in ascending order, got %q before %q, race %+v",
+							actual,
+							name,
+							race,
+						)
+					}
+					name = actual
+				}
+			},
+		},
+		{
+			name: "oder by name descending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_NAME_DESC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				name := "ZZZZZZZZZZZZZZZZZZZZ"
+				for _, race := range resp.GetRaces() {
+					actual := race.GetName()
+					if actual > name {
+						t.Errorf(
+							"expected name to be in descending order, got %q after %q, race %+v",
+							actual,
+							name,
+							race,
+						)
+					}
+					name = actual
+				}
+			},
+		},
+		{
+			name: "ordered by number ascending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_NUMBER_ASC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				var lastNumber int64
+				for _, race := range resp.GetRaces() {
+					actual := race.GetNumber()
+					if actual < lastNumber {
+						t.Errorf(
+							"expected number to be in ascending order, got %d before %d, race %+v",
+							actual,
+							lastNumber,
+							race,
+						)
+					}
+					lastNumber = actual
+				}
+			},
+		},
+		{
+			name: "ordered by number descending",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_NUMBER_DESC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				var lastNumber int64 = 1_000_000
+				for _, race := range resp.GetRaces() {
+					actual := race.GetNumber()
+					if actual > lastNumber {
+						t.Errorf(
+							"expected number to be in descending order, got %d after %d, race %+v",
+							actual,
+							lastNumber,
+							race,
+						)
+					}
+					lastNumber = actual
+				}
+			},
+		},
+		{
+			name: "ordered by multiple fields",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_MEETING_ID_ASC,
+					apiracing.ListRacesRequest_NUMBER_DESC,
+				},
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				var (
+					lastMeetingID int64
+					lastNumber    int64 = 1_000_000
+				)
+				for _, race := range resp.GetRaces() {
+					actualMeetingID := race.GetMeetingId()
+					actualNumber := race.GetNumber()
+					if actualMeetingID < lastMeetingID {
+						t.Errorf(
+							"expected meeting ID to be in ascending order, got %d before %d, race %+v",
+							actualMeetingID,
+							lastMeetingID,
+							race,
+						)
+					}
+
+					if actualMeetingID != lastMeetingID {
+						// Reset the last number if the meeting ID changed.
+						lastNumber = 1_000_000
+					}
+
+					if actualNumber > lastNumber {
+						t.Errorf(
+							"expected number to be in descending order, got %d after %d, race %+v",
+							actualNumber,
+							lastNumber,
+							race,
+						)
+					}
+					lastMeetingID = actualMeetingID
+					lastNumber = actualNumber
+				}
+			},
+		},
+		{
+			name: "conflicted orderings",
+			req: &apiracing.ListRacesRequest{
+				OrderBy: []apiracing.ListRacesRequest_OrderBy{
+					apiracing.ListRacesRequest_MEETING_ID_ASC,
+					apiracing.ListRacesRequest_MEETING_ID_DESC,
+				},
+			},
+			assertion: func(t *testing.T, _ *apiracing.ListRacesResponse, err error) {
+				if err == nil {
+					t.Fatalf("expected error, got %v", err)
 				}
 			},
 		},

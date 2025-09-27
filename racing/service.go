@@ -30,19 +30,26 @@ func (s *Service) ListRaces(
 ) (*racingapi.ListRacesResponse, error) {
 	filterQuery, args := parseFilter(req)
 
+	orderBy, err := parseOrderBy(req)
+	if err != nil {
+		return nil, err
+	}
+
 	rows, err := s.DB.QueryContext(
 		ctx,
 		fmt.Sprintf(
 			`SELECT
-			id,
-			meeting_id,
-			name,
-			number,
-			visible,
-			advertised_start_time
-		 FROM races
-		 WHERE id <> 0 %s`,
-			filterQuery),
+				id,
+				meeting_id,
+				name,
+				number,
+				visible,
+				advertised_start_time
+			FROM races
+		 	WHERE id <> 0 %s %s`,
+			filterQuery,
+			orderBy,
+		),
 		args...,
 	)
 	if err != nil {
@@ -94,14 +101,17 @@ func parseFilter(
 		_, _ = w.WriteString(" AND meeting_id IN (")
 
 		for i, id := range req.GetMeetingId() {
+			_, _ = w.WriteString("?")
+			args = append(args, id)
+
+			// If it's the last element, close the parenthesis and break.
+			// Otherwise, add a comma.
 			if i == len(req.GetMeetingId())-1 {
-				_, _ = w.WriteString("?)")
-				args = append(args, id)
+				_, _ = w.WriteString(")")
 				break
 			}
 
-			_, _ = w.WriteString("?,")
-			args = append(args, id)
+			_, _ = w.WriteString(", ")
 		}
 	}
 
@@ -110,4 +120,64 @@ func parseFilter(
 	}
 
 	return w.String(), args
+}
+
+// conflictingOrdering maps each ordering option to its conflicting counterpart.
+var conflictingOrdering = map[racingapi.ListRacesRequest_OrderBy]racingapi.ListRacesRequest_OrderBy{
+	racingapi.ListRacesRequest_ADVERTISED_START_TIME_ASC:  racingapi.ListRacesRequest_ADVERTISED_START_TIME_DESC,
+	racingapi.ListRacesRequest_ADVERTISED_START_TIME_DESC: racingapi.ListRacesRequest_ADVERTISED_START_TIME_ASC,
+	racingapi.ListRacesRequest_MEETING_ID_ASC:             racingapi.ListRacesRequest_MEETING_ID_DESC,
+	racingapi.ListRacesRequest_MEETING_ID_DESC:            racingapi.ListRacesRequest_MEETING_ID_ASC,
+	racingapi.ListRacesRequest_NAME_ASC:                   racingapi.ListRacesRequest_NAME_DESC,
+	racingapi.ListRacesRequest_NAME_DESC:                  racingapi.ListRacesRequest_NAME_ASC,
+	racingapi.ListRacesRequest_NUMBER_ASC:                 racingapi.ListRacesRequest_NUMBER_DESC,
+	racingapi.ListRacesRequest_NUMBER_DESC:                racingapi.ListRacesRequest_NUMBER_ASC,
+}
+
+func parseOrderBy(req *racingapi.ListRacesRequest) (string, error) {
+	var w strings.Builder
+
+	if len(req.GetOrderBy()) == 0 {
+		return "", nil
+	}
+
+	w.WriteString(" ORDER BY ")
+	visited := map[racingapi.ListRacesRequest_OrderBy]bool{}
+
+	for i, order := range req.GetOrderBy() {
+		if visited[conflictingOrdering[order]] {
+			return "", status.Error(
+				codes.InvalidArgument,
+				"conflicting order by fields",
+			)
+		}
+
+		switch order {
+		case racingapi.ListRacesRequest_ADVERTISED_START_TIME_ASC:
+			_, _ = w.WriteString("advertised_start_time ASC")
+		case racingapi.ListRacesRequest_ADVERTISED_START_TIME_DESC:
+			_, _ = w.WriteString("advertised_start_time DESC")
+		case racingapi.ListRacesRequest_MEETING_ID_ASC:
+			_, _ = w.WriteString("meeting_id ASC")
+		case racingapi.ListRacesRequest_MEETING_ID_DESC:
+			_, _ = w.WriteString("meeting_id DESC")
+		case racingapi.ListRacesRequest_NAME_ASC:
+			_, _ = w.WriteString("name ASC")
+		case racingapi.ListRacesRequest_NAME_DESC:
+			_, _ = w.WriteString("name DESC")
+		case racingapi.ListRacesRequest_NUMBER_ASC:
+			_, _ = w.WriteString("number ASC")
+		case racingapi.ListRacesRequest_NUMBER_DESC:
+			_, _ = w.WriteString("number DESC")
+		}
+
+		visited[order] = true
+
+		// Add a comma if it's not the last element.
+		if i != len(req.GetOrderBy())-1 {
+			_, _ = w.WriteString(", ")
+		}
+	}
+
+	return w.String(), nil
 }

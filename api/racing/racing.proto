@@ -23,6 +23,32 @@ message ListRacesRequest {
 
   // VisibleOnly indicates whether to return only visible races.
   bool visible_only = 2;
+
+  enum OrderBy {
+    // UNSPECIFIED indicates no specific ordering.
+    UNSPECIFIED = 0;
+    // ADVERTISED_START_TIME_ASC orders by advertised start time in
+    // ascending order.
+    ADVERTISED_START_TIME_ASC = 1;
+    // ADVERTISED_START_TIME_DESC orders by advertised start time in
+    // descending order.
+    ADVERTISED_START_TIME_DESC = 2;
+    // NUMBER_ASC orders by race number in ascending order.
+    NUMBER_ASC = 3;
+    // NUMBER_DESC orders by race number in descending order.
+    NUMBER_DESC = 4;
+    // NAME_ASC orders by race name in ascending order.
+    NAME_ASC = 5;
+    // NAME_DESC orders by race name in descending order.
+    NAME_DESC = 6;
+    // MEETING_ID_ASC orders by meeting ID in ascending order.
+    MEETING_ID_ASC = 7;
+    // MEETING_ID_DESC orders by meeting ID in descending order.
+    MEETING_ID_DESC = 8;
+  }
+
+  // OrderBy specifies the ordering of the returned races.
+  repeated OrderBy order_by = 3;
 }
 
 // ListRacesResponse represents a response to the ListRaces call.

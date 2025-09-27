@@ -112,6 +112,8 @@ command:
 curl -i -X GET http://localhost:8000/v1/races
 ```
 
+### Filtering races
+
 You can use `meetingId` query parameter to filter the races by meeting ID. You
 can use this parameter multiple times to filter by multiple meeting IDs, for example:
 
@@ -127,6 +129,33 @@ curl -i -X GET "http://localhost:8000/v1/races?visibleOnly=true"
 
 Please note that that if `visibleOnly` is set to false or not set at all, both
 visible and non-visible races will be returned.
+
+### Ordering of races
+
+You can use `orderBy` query parameter to order the races by different fields. The
+possible values are:
+
+- `ADVERTISED_START_TIME_ASC` - order by advertised start time in ascending order
+- `ADVERTISED_START_TIME_DESC` - order by advertised start time in descending order
+- `MEETING_ID_ASC` - order by meeting ID in ascending order
+- `MEETING_ID_DESC` - order by meeting ID in descending order
+- `NAME_ASC` - order by name in ascending order
+- `NAME_DESC` - order by name in descending order
+- `NUMBER_ASC` - order by number in ascending order
+- `NUMBER_DESC` - order by number in descending order
+
+You can use this parameter multiple times to order by multiple fields. The sequence
+of the parameters defines the order of precedence. In the example below, the
+races will be ordered first by advertised start time in ascending order, and then
+by meeting ID in descending order.
+
+```bash
+curl -i -X GET "http://localhost:8000/v1/races?orderBy=ADVERTISED_START_TIME_ASC&orderBy=MEETING_ID_DESC"
+```
+
+Please note that if you specify conflicting ordering options (e.g.,
+`ADVERTISED_START_TIME_ASC` and `ADVERTISED_START_TIME_DESC`), the service will
+return an error.
 
 ## Testing
 

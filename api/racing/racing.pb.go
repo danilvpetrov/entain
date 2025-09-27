@@ -23,13 +23,93 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ListRacesRequest_OrderBy int32
+
+const (
+	// UNSPECIFIED indicates no specific ordering.
+	ListRacesRequest_UNSPECIFIED ListRacesRequest_OrderBy = 0
+	// ADVERTISED_START_TIME_ASC orders by advertised start time in
+	// ascending order.
+	ListRacesRequest_ADVERTISED_START_TIME_ASC ListRacesRequest_OrderBy = 1
+	// ADVERTISED_START_TIME_DESC orders by advertised start time in
+	// descending order.
+	ListRacesRequest_ADVERTISED_START_TIME_DESC ListRacesRequest_OrderBy = 2
+	// NUMBER_ASC orders by race number in ascending order.
+	ListRacesRequest_NUMBER_ASC ListRacesRequest_OrderBy = 3
+	// NUMBER_DESC orders by race number in descending order.
+	ListRacesRequest_NUMBER_DESC ListRacesRequest_OrderBy = 4
+	// NAME_ASC orders by race name in ascending order.
+	ListRacesRequest_NAME_ASC ListRacesRequest_OrderBy = 5
+	// NAME_DESC orders by race name in descending order.
+	ListRacesRequest_NAME_DESC ListRacesRequest_OrderBy = 6
+	// MEETING_ID_ASC orders by meeting ID in ascending order.
+	ListRacesRequest_MEETING_ID_ASC ListRacesRequest_OrderBy = 7
+	// MEETING_ID_DESC orders by meeting ID in descending order.
+	ListRacesRequest_MEETING_ID_DESC ListRacesRequest_OrderBy = 8
+)
+
+// Enum value maps for ListRacesRequest_OrderBy.
+var (
+	ListRacesRequest_OrderBy_name = map[int32]string{
+		0: "UNSPECIFIED",
+		1: "ADVERTISED_START_TIME_ASC",
+		2: "ADVERTISED_START_TIME_DESC",
+		3: "NUMBER_ASC",
+		4: "NUMBER_DESC",
+		5: "NAME_ASC",
+		6: "NAME_DESC",
+		7: "MEETING_ID_ASC",
+		8: "MEETING_ID_DESC",
+	}
+	ListRacesRequest_OrderBy_value = map[string]int32{
+		"UNSPECIFIED":                0,
+		"ADVERTISED_START_TIME_ASC":  1,
+		"ADVERTISED_START_TIME_DESC": 2,
+		"NUMBER_ASC":                 3,
+		"NUMBER_DESC":                4,
+		"NAME_ASC":                   5,
+		"NAME_DESC":                  6,
+		"MEETING_ID_ASC":             7,
+		"MEETING_ID_DESC":            8,
+	}
+)
+
+func (x ListRacesRequest_OrderBy) Enum() *ListRacesRequest_OrderBy {
+	p := new(ListRacesRequest_OrderBy)
+	*p = x
+	return p
+}
+
+func (x ListRacesRequest_OrderBy) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ListRacesRequest_OrderBy) Descriptor() protoreflect.EnumDescriptor {
+	return file_api_racing_racing_proto_enumTypes[0].Descriptor()
+}
+
+func (ListRacesRequest_OrderBy) Type() protoreflect.EnumType {
+	return &file_api_racing_racing_proto_enumTypes[0]
+}
+
+func (x ListRacesRequest_OrderBy) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ListRacesRequest_OrderBy.Descriptor instead.
+func (ListRacesRequest_OrderBy) EnumDescriptor() ([]byte, []int) {
+	return file_api_racing_racing_proto_rawDescGZIP(), []int{0, 0}
+}
+
 // ListRacesRequest represents a request for the ListRaces call.
 type ListRacesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// MeetingId is an optional list of meeting IDs to filter the races.
 	MeetingId []int64 `protobuf:"varint,1,rep,packed,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
 	// VisibleOnly indicates whether to return only visible races.
-	VisibleOnly   bool `protobuf:"varint,2,opt,name=visible_only,json=visibleOnly,proto3" json:"visible_only,omitempty"`
+	VisibleOnly bool `protobuf:"varint,2,opt,name=visible_only,json=visibleOnly,proto3" json:"visible_only,omitempty"`
+	// OrderBy specifies the ordering of the returned races.
+	OrderBy       []ListRacesRequest_OrderBy `protobuf:"varint,3,rep,packed,name=order_by,json=orderBy,proto3,enum=racing.ListRacesRequest_OrderBy" json:"order_by,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -76,6 +156,13 @@ func (x *ListRacesRequest) GetVisibleOnly() bool {
 		return x.VisibleOnly
 	}
 	return false
+}
+
+func (x *ListRacesRequest) GetOrderBy() []ListRacesRequest_OrderBy {
+	if x != nil {
+		return x.OrderBy
+	}
+	return nil
 }
 
 // ListRacesResponse represents a response to the ListRaces call.
@@ -219,11 +306,23 @@ var File_api_racing_racing_proto protoreflect.FileDescriptor
 
 const file_api_racing_racing_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/racing/racing.proto\x12\x06racing\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"T\n" +
+	"\x17api/racing/racing.proto\x12\x06racing\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xd4\x02\n" +
 	"\x10ListRacesRequest\x12\x1d\n" +
 	"\n" +
 	"meeting_id\x18\x01 \x03(\x03R\tmeetingId\x12!\n" +
-	"\fvisible_only\x18\x02 \x01(\bR\vvisibleOnly\"7\n" +
+	"\fvisible_only\x18\x02 \x01(\bR\vvisibleOnly\x12;\n" +
+	"\border_by\x18\x03 \x03(\x0e2 .racing.ListRacesRequest.OrderByR\aorderBy\"\xc0\x01\n" +
+	"\aOrderBy\x12\x0f\n" +
+	"\vUNSPECIFIED\x10\x00\x12\x1d\n" +
+	"\x19ADVERTISED_START_TIME_ASC\x10\x01\x12\x1e\n" +
+	"\x1aADVERTISED_START_TIME_DESC\x10\x02\x12\x0e\n" +
+	"\n" +
+	"NUMBER_ASC\x10\x03\x12\x0f\n" +
+	"\vNUMBER_DESC\x10\x04\x12\f\n" +
+	"\bNAME_ASC\x10\x05\x12\r\n" +
+	"\tNAME_DESC\x10\x06\x12\x12\n" +
+	"\x0eMEETING_ID_ASC\x10\a\x12\x13\n" +
+	"\x0fMEETING_ID_DESC\x10\b\"7\n" +
 	"\x11ListRacesResponse\x12\"\n" +
 	"\x05races\x18\x01 \x03(\v2\f.racing.RaceR\x05races\"\xcb\x01\n" +
 	"\x04Race\x12\x0e\n" +
@@ -249,23 +348,26 @@ func file_api_racing_racing_proto_rawDescGZIP() []byte {
 	return file_api_racing_racing_proto_rawDescData
 }
 
+var file_api_racing_racing_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_api_racing_racing_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_api_racing_racing_proto_goTypes = []any{
-	(*ListRacesRequest)(nil),      // 0: racing.ListRacesRequest
-	(*ListRacesResponse)(nil),     // 1: racing.ListRacesResponse
-	(*Race)(nil),                  // 2: racing.Race
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(ListRacesRequest_OrderBy)(0), // 0: racing.ListRacesRequest.OrderBy
+	(*ListRacesRequest)(nil),      // 1: racing.ListRacesRequest
+	(*ListRacesResponse)(nil),     // 2: racing.ListRacesResponse
+	(*Race)(nil),                  // 3: racing.Race
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 }
 var file_api_racing_racing_proto_depIdxs = []int32{
-	2, // 0: racing.ListRacesResponse.races:type_name -> racing.Race
-	3, // 1: racing.Race.advertised_start_time:type_name -> google.protobuf.Timestamp
-	0, // 2: racing.Racing.ListRaces:input_type -> racing.ListRacesRequest
-	1, // 3: racing.Racing.ListRaces:output_type -> racing.ListRacesResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: racing.ListRacesRequest.order_by:type_name -> racing.ListRacesRequest.OrderBy
+	3, // 1: racing.ListRacesResponse.races:type_name -> racing.Race
+	4, // 2: racing.Race.advertised_start_time:type_name -> google.protobuf.Timestamp
+	1, // 3: racing.Racing.ListRaces:input_type -> racing.ListRacesRequest
+	2, // 4: racing.Racing.ListRaces:output_type -> racing.ListRacesResponse
+	4, // [4:5] is the sub-list for method output_type
+	3, // [3:4] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_api_racing_racing_proto_init() }
@@ -278,13 +380,14 @@ func file_api_racing_racing_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_racing_racing_proto_rawDesc), len(file_api_racing_racing_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_api_racing_racing_proto_goTypes,
 		DependencyIndexes: file_api_racing_racing_proto_depIdxs,
+		EnumInfos:         file_api_racing_racing_proto_enumTypes,
 		MessageInfos:      file_api_racing_racing_proto_msgTypes,
 	}.Build()
 	File_api_racing_racing_proto = out.File
