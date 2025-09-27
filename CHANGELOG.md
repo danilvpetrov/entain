@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.4.0] - 2025-09-27
+
+### Added
+
+- Added `status` field to the result of `ListRaces` RPC in the racing service.
+  The field can have values `OPEN` or `CLOSED` depending on whether the race is
+  currently open for betting or not.
+
 ## [v0.3.0] - 2025-09-27
 
 ### Added
@@ -43,7 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved code structure and organization
 - Added Makefile for building and running the services
 
-[unreleased]: https://github.com/danilvpetrov/entain/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/danilvpetrov/entain/compare/v0.4.0...HEAD
+[v0.4.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.4.0
 [v0.3.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.3.0
 [v0.2.1]: https://github.com/danilvpetrov/entain/releases/tag/v0.2.1
 [v0.2.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.2.0
