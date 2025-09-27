@@ -177,7 +177,18 @@ make generate
 
 ### Task 1
 
-> Add another filter to the existing RPC, so we can call `ListRaces` asking for races that are visible only
+> Add another filter to the existing RPC, so we can call `ListRaces` asking for
+> races that are visible only
 
 The changes related to this task can be traced at the branch
-[`visible-only-races-filter`](https://github.com/danilvpetrov/entain/tree/visible-only-races-filter). The commits on this branch should be merged into the `main` branch.
+[`visible-only-races-filter`](https://github.com/danilvpetrov/entain/tree/visible-only-races-filter).
+The commits on this branch should be merged into the `main` branch.
+
+### Task 2
+
+> We'd like to see the races returned, ordered by their `advertised_start_time`
+> Bonus points if you allow the consumer to specify an ORDER/SORT-BY they might be after.
+
+The changes related to this task can be traced at the branch
+[`race-result-ordering`](https://github.com/danilvpetrov/entain/tree/race-result-ordering).
+The commits on this branch should be merged into the `main` branch.
