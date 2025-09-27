@@ -56,7 +56,11 @@ func TestListRaces(t *testing.T) {
 
 				for _, race := range resp.GetRaces() {
 					if !slices.Contains([]int64{1, 2, 3}, race.GetMeetingId()) {
-						t.Errorf("unexpected meeting ID %d for race %+v", race.GetMeetingId(), race)
+						t.Errorf(
+							"unexpected meeting ID %d for race %+v",
+							race.GetMeetingId(),
+							race,
+						)
 					}
 				}
 			},

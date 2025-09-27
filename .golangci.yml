@@ -91,6 +91,12 @@ formatters:
   enable:
     - gofmt
     - goimports
+    - gofumpt
+    - golines
+  settings:
+    golines:
+      max-len: 80
+      shorten-comments: true
   exclusions:
     generated: lax
     paths:
