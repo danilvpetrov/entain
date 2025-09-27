@@ -192,3 +192,13 @@ The commits on this branch should be merged into the `main` branch.
 The changes related to this task can be traced at the branch
 [`race-result-ordering`](https://github.com/danilvpetrov/entain/tree/race-result-ordering).
 The commits on this branch should be merged into the `main` branch.
+
+### Task 3
+
+> Our races require a new `status` field that is derived based on their
+> `advertised_start_time`'s. The status is simply, `OPEN` or `CLOSED`. All races
+> that have an `advertised_start_time` in the past should reflect `CLOSED`.
+
+The changes related to this task can be traced at the branch
+[`race-status`](https://github.com/danilvpetrov/entain/tree/race-status).
+The commits on this branch should be merged into the `main` branch.

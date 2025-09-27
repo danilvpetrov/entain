@@ -15,12 +15,14 @@ import (
 )
 
 // Service handles all requests related to racing. It implements
-// apiracing.RacingServer interface.
+// racingapi.RacingServer interface.
 type Service struct {
+	// DB is a database connection pool used to perform queries against the
+	// underlying database.
 	DB *sql.DB
 }
 
-// Make sure Service implements the apiracing.RacingServer interface.
+// Make sure Service implements the racingapi.RacingServer interface.
 var _ racingapi.RacingServer = (*Service)(nil)
 
 // ListRaces returns a list of all races. It can be filtered by meeting IDs.
@@ -78,6 +80,7 @@ func (s *Service) ListRaces(
 			return nil, status.Error(codes.Internal, err.Error())
 		}
 		race.AdvertisedStartTime = timestamppb.New(advertisedStartTime)
+		race.Status = computeRaceStatus(advertisedStartTime)
 		races = append(races, &race)
 	}
 
@@ -180,4 +183,15 @@ func parseOrderBy(req *racingapi.ListRacesRequest) (string, error) {
 	}
 
 	return w.String(), nil
+}
+
+// computeRaceStatus computes the status of a race based on its advertised start
+// time.
+func computeRaceStatus(
+	advertisedStartTime time.Time,
+) racingapi.Race_Status {
+	if advertisedStartTime.After(time.Now()) {
+		return racingapi.Race_OPEN
+	}
+	return racingapi.Race_CLOSED
 }

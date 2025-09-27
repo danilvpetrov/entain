@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	apiracing "github.com/danilvpetrov/entain/api/racing"
+	racingapi "github.com/danilvpetrov/entain/api/racing"
 	. "github.com/danilvpetrov/entain/racing"
 )
 
@@ -18,16 +18,16 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 	cases := []struct {
 		assertion func(
 			t *testing.T,
-			resp *apiracing.ListRacesResponse,
+			resp *racingapi.ListRacesResponse,
 			err error,
 		)
-		req  *apiracing.ListRacesRequest
+		req  *racingapi.ListRacesRequest
 		name string
 	}{
 		{
 			name: "no filter",
-			req:  &apiracing.ListRacesRequest{},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			req:  &racingapi.ListRacesRequest{},
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -43,10 +43,10 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "filtered by meeting IDs",
-			req: &apiracing.ListRacesRequest{
+			req: &racingapi.ListRacesRequest{
 				MeetingId: []int64{1, 2, 3},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -68,10 +68,10 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "filtered by visible only",
-			req: &apiracing.ListRacesRequest{
+			req: &racingapi.ListRacesRequest{
 				VisibleOnly: true,
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -85,12 +85,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "ordered by an advertised start time ascending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_ADVERTISED_START_TIME_ASC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_ADVERTISED_START_TIME_ASC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -113,12 +113,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "ordered by an advertised start time descending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_ADVERTISED_START_TIME_DESC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_ADVERTISED_START_TIME_DESC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -142,12 +142,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "ordered by meeting ID ascending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_MEETING_ID_ASC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_MEETING_ID_ASC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -168,12 +168,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "ordered by meeting ID descending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_MEETING_ID_DESC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_MEETING_ID_DESC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -191,12 +191,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "oder by name ascending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_NAME_ASC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_NAME_ASC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -218,12 +218,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "oder by name descending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_NAME_DESC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_NAME_DESC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -245,12 +245,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "ordered by number ascending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_NUMBER_ASC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_NUMBER_ASC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -272,12 +272,12 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "ordered by number descending",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_NUMBER_DESC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_NUMBER_DESC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -299,13 +299,13 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "ordered by multiple fields",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_MEETING_ID_ASC,
-					apiracing.ListRacesRequest_NUMBER_DESC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_MEETING_ID_ASC,
+					racingapi.ListRacesRequest_NUMBER_DESC,
 				},
 			},
-			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
 				if err != nil {
 					t.Fatalf("expected no error, got %v", err)
 				}
@@ -346,15 +346,40 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		},
 		{
 			name: "conflicted orderings",
-			req: &apiracing.ListRacesRequest{
-				OrderBy: []apiracing.ListRacesRequest_OrderBy{
-					apiracing.ListRacesRequest_MEETING_ID_ASC,
-					apiracing.ListRacesRequest_MEETING_ID_DESC,
+			req: &racingapi.ListRacesRequest{
+				OrderBy: []racingapi.ListRacesRequest_OrderBy{
+					racingapi.ListRacesRequest_MEETING_ID_ASC,
+					racingapi.ListRacesRequest_MEETING_ID_DESC,
 				},
 			},
-			assertion: func(t *testing.T, _ *apiracing.ListRacesResponse, err error) {
+			assertion: func(t *testing.T, _ *racingapi.ListRacesResponse, err error) {
 				if err == nil {
 					t.Fatalf("expected error, got %v", err)
+				}
+			},
+		},
+		{
+			name: "status field is computed correctly",
+			req:  &racingapi.ListRacesRequest{},
+			assertion: func(t *testing.T, resp *racingapi.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				for _, race := range resp.GetRaces() {
+					expected := racingapi.Race_OPEN
+					now := time.Now()
+					if race.GetAdvertisedStartTime().AsTime().Before(now) {
+						expected = racingapi.Race_CLOSED
+					}
+
+					if race.GetStatus() != expected {
+						t.Errorf(
+							"expected status %v, got %v",
+							expected,
+							race.GetStatus(),
+						)
+					}
 				}
 			},
 		},
