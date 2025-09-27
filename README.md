@@ -119,6 +119,15 @@ can use this parameter multiple times to filter by multiple meeting IDs, for exa
 curl -i -X GET "http://localhost:8000/v1/races?meetingId=1&meetingId=2"
 ```
 
+You can also use `visibleOnly` query parameter to filter only visible races. For example:
+
+```bash
+curl -i -X GET "http://localhost:8000/v1/races?visibleOnly=true"
+```
+
+Please note that that if `visibleOnly` is set to false or not set at all, both
+visible and non-visible races will be returned.
+
 ## Testing
 
 To run unit tests of all services, use the following command:
@@ -134,3 +143,12 @@ To generate code from `*.proto` files, use the following command:
 ```bash
 make generate
 ```
+
+## Technical tasks
+
+### Task 1
+
+> Add another filter to the existing RPC, so we can call `ListRaces` asking for races that are visible only
+
+The changes related to this task can be traced at the branch
+[`visible-only-races-filter`](https://github.com/danilvpetrov/entain/tree/visible-only-races-filter). The commits on this branch should be merged into the `main` branch.

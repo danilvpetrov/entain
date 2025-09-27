@@ -27,7 +27,9 @@ const (
 type ListRacesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// MeetingId is an optional list of meeting IDs to filter the races.
-	MeetingId     []int64 `protobuf:"varint,1,rep,packed,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
+	MeetingId []int64 `protobuf:"varint,1,rep,packed,name=meeting_id,json=meetingId,proto3" json:"meeting_id,omitempty"`
+	// VisibleOnly indicates whether to return only visible races.
+	VisibleOnly   bool `protobuf:"varint,2,opt,name=visible_only,json=visibleOnly,proto3" json:"visible_only,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -67,6 +69,13 @@ func (x *ListRacesRequest) GetMeetingId() []int64 {
 		return x.MeetingId
 	}
 	return nil
+}
+
+func (x *ListRacesRequest) GetVisibleOnly() bool {
+	if x != nil {
+		return x.VisibleOnly
+	}
+	return false
 }
 
 // ListRacesResponse represents a response to the ListRaces call.
@@ -210,10 +219,11 @@ var File_api_racing_racing_proto protoreflect.FileDescriptor
 
 const file_api_racing_racing_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/racing/racing.proto\x12\x06racing\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"1\n" +
+	"\x17api/racing/racing.proto\x12\x06racing\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"T\n" +
 	"\x10ListRacesRequest\x12\x1d\n" +
 	"\n" +
-	"meeting_id\x18\x01 \x03(\x03R\tmeetingId\"7\n" +
+	"meeting_id\x18\x01 \x03(\x03R\tmeetingId\x12!\n" +
+	"\fvisible_only\x18\x02 \x01(\bR\vvisibleOnly\"7\n" +
 	"\x11ListRacesResponse\x12\"\n" +
 	"\x05races\x18\x01 \x03(\v2\f.racing.RaceR\x05races\"\xcb\x01\n" +
 	"\x04Race\x12\x0e\n" +

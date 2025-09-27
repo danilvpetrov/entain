@@ -91,7 +91,7 @@ func parseFilter(
 	var w strings.Builder
 
 	if len(req.GetMeetingId()) > 0 {
-		_, _ = w.WriteString("AND meeting_id IN (")
+		_, _ = w.WriteString(" AND meeting_id IN (")
 
 		for i, id := range req.GetMeetingId() {
 			if i == len(req.GetMeetingId())-1 {
@@ -103,6 +103,10 @@ func parseFilter(
 			_, _ = w.WriteString("?,")
 			args = append(args, id)
 		}
+	}
+
+	if req.GetVisibleOnly() {
+		_, _ = w.WriteString(" AND visible = true")
 	}
 
 	return w.String(), args

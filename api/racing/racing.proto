@@ -20,6 +20,9 @@ service Racing {
 message ListRacesRequest {
   // MeetingId is an optional list of meeting IDs to filter the races.
   repeated int64 meeting_id = 1;
+
+  // VisibleOnly indicates whether to return only visible races.
+  bool visible_only = 2;
 }
 
 // ListRacesResponse represents a response to the ListRaces call.

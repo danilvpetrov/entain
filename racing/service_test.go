@@ -65,6 +65,23 @@ func TestListRaces(t *testing.T) {
 				}
 			},
 		},
+		{
+			name: "filtered by visible only",
+			req: &apiracing.ListRacesRequest{
+				VisibleOnly: true,
+			},
+			assertion: func(t *testing.T, resp *apiracing.ListRacesResponse, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				for _, race := range resp.GetRaces() {
+					if !race.GetVisible() {
+						t.Errorf("expected race %+v to be visible", race)
+					}
+				}
+			},
+		},
 	}
 
 	for _, c := range cases {

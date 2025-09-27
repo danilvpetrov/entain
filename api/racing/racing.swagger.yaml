@@ -32,6 +32,11 @@ paths:
             type: string
             format: int64
           collectionFormat: multi
+        - name: visibleOnly
+          description: VisibleOnly indicates whether to return only visible races.
+          in: query
+          required: false
+          type: boolean
       tags:
         - Racing
 definitions:

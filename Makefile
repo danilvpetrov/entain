@@ -2,7 +2,7 @@
 PROTO_FILES += $(shell find api -type f -name '*.proto')
 
 .PHONY: test
-test:
+test: generate
 	go test -v -race -count 1 ./...
 
 .PHONY: generate
