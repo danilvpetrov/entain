@@ -392,3 +392,54 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		})
 	}
 }
+
+func TestGetRace(t *testing.T) {
+	s := &Service{
+		DB: setupDatabase(t),
+	}
+	client := setupServer(t, s)
+
+	cases := []struct {
+		assertion func(
+			t *testing.T,
+			race *racingapi.Race,
+			err error,
+		)
+		req  *racingapi.GetRaceRequest
+		name string
+	}{
+		{
+			name: "gets race by ID",
+			req: &racingapi.GetRaceRequest{
+				RaceId: 1,
+			},
+			assertion: func(t *testing.T, race *racingapi.Race, err error) {
+				if err != nil {
+					t.Fatalf("expected no error, got %v", err)
+				}
+
+				if race.GetId() != 1 {
+					t.Fatalf("expected race ID to be 1, got %d", race.GetId())
+				}
+			},
+		},
+		{
+			name: "non-existing race",
+			req: &racingapi.GetRaceRequest{
+				RaceId: 999,
+			},
+			assertion: func(t *testing.T, _ *racingapi.Race, err error) {
+				if err == nil {
+					t.Fatalf("expected error, got %v", err)
+				}
+			},
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			resp, err := client.GetRace(t.Context(), c.req)
+			c.assertion(t, resp, err)
+		})
+	}
+}

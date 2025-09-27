@@ -3,6 +3,7 @@ package racing
 import (
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 	"log/slog"
 	"strings"
@@ -25,7 +26,7 @@ type Service struct {
 // Make sure Service implements the racingapi.RacingServer interface.
 var _ racingapi.RacingServer = (*Service)(nil)
 
-// ListRaces returns a list of all races. It can be filtered by meeting IDs.
+// ListRaces returns a list of all races.
 func (s *Service) ListRaces(
 	ctx context.Context,
 	req *racingapi.ListRacesRequest,
@@ -65,23 +66,11 @@ func (s *Service) ListRaces(
 
 	var races []*racingapi.Race
 	for rows.Next() {
-		var (
-			race                racingapi.Race
-			advertisedStartTime time.Time
-		)
-		if err := rows.Scan(
-			&race.Id,
-			&race.MeetingId,
-			&race.Name,
-			&race.Number,
-			&race.Visible,
-			&advertisedStartTime,
-		); err != nil {
+		race, err := scanRace(rows)
+		if err != nil {
 			return nil, status.Error(codes.Internal, err.Error())
 		}
-		race.AdvertisedStartTime = timestamppb.New(advertisedStartTime)
-		race.Status = computeRaceStatus(advertisedStartTime)
-		races = append(races, &race)
+		races = append(races, race)
 	}
 
 	if err := rows.Err(); err != nil {
@@ -91,6 +80,64 @@ func (s *Service) ListRaces(
 	return &racingapi.ListRacesResponse{
 		Races: races,
 	}, nil
+}
+
+// GetRace returns a specific race by its ID.
+func (s *Service) GetRace(
+	ctx context.Context,
+	req *racingapi.GetRaceRequest,
+) (*racingapi.Race, error) {
+	row := s.DB.QueryRowContext(
+		ctx,
+		`SELECT
+			id,
+			meeting_id,
+			name,
+			number,
+			visible,
+			advertised_start_time
+		FROM races
+		WHERE id = ?`,
+		req.GetRaceId(),
+	)
+
+	race, err := scanRace(row)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, status.Error(codes.NotFound, "race not found")
+		}
+		return nil, status.Error(codes.Internal, err.Error())
+	}
+
+	return race, nil
+}
+
+// scanner is an interface that abstracts sql.Row and sql.Rows types.
+type scanner interface {
+	Scan(dest ...any) error
+}
+
+// scanRace scans a race from the given scanner.
+func scanRace(s scanner) (*racingapi.Race, error) {
+	var (
+		race                racingapi.Race
+		advertisedStartTime time.Time
+	)
+	if err := s.Scan(
+		&race.Id,
+		&race.MeetingId,
+		&race.Name,
+		&race.Number,
+		&race.Visible,
+		&advertisedStartTime,
+	); err != nil {
+		return nil, err
+	}
+
+	race.AdvertisedStartTime = timestamppb.New(advertisedStartTime)
+	race.Status = computeRaceStatus(advertisedStartTime)
+
+	return &race, nil
 }
 
 // parseFilter builds SQL filter query and its arguments from the provided

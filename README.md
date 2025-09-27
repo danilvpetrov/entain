@@ -112,7 +112,15 @@ command:
 curl -i -X GET http://localhost:8000/v1/races
 ```
 
-### Filtering races
+### Listing races
+
+You can use the `ListRaces` RPC to list all races. For example:
+
+```bash
+curl -i -X GET http://localhost:8000/v1/races
+```
+
+#### Filtering races
 
 You can use `meetingId` query parameter to filter the races by meeting ID. You
 can use this parameter multiple times to filter by multiple meeting IDs, for example:
@@ -130,7 +138,7 @@ curl -i -X GET "http://localhost:8000/v1/races?visibleOnly=true"
 Please note that that if `visibleOnly` is set to false or not set at all, both
 visible and non-visible races will be returned.
 
-### Ordering of races
+#### Ordering of races
 
 You can use `orderBy` query parameter to order the races by different fields. The
 possible values are:
@@ -156,6 +164,17 @@ curl -i -X GET "http://localhost:8000/v1/races?orderBy=ADVERTISED_START_TIME_ASC
 Please note that if you specify conflicting ordering options (e.g.,
 `ADVERTISED_START_TIME_ASC` and `ADVERTISED_START_TIME_DESC`), the service will
 return an error.
+
+### Getting a specific race
+
+To get a specific race, you can use the `GetRace` RPC and specify the race ID at
+the end of the URL. For example:
+
+```bash
+curl -i -X GET http://localhost:8000/v1/races/1
+```
+
+This will return the details of the race with ID 1.
 
 ## Testing
 

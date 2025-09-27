@@ -14,6 +14,13 @@ service Racing {
       get : "/v1/races"
     };
   }
+
+  // GetRace returns a specific race by its ID.
+  rpc GetRace(GetRaceRequest) returns (Race) {
+    option (google.api.http) = {
+      get : "/v1/races/{race_id}"
+    };
+  }
 }
 
 // ListRacesRequest represents a request for the ListRaces call.
@@ -55,6 +62,12 @@ message ListRacesRequest {
 message ListRacesResponse {
   // Races is a list of horse racing events.
   repeated Race races = 1;
+}
+
+// GetRaceRequest represents a request for the GetRace call.
+message GetRaceRequest {
+  // The ID of the race to retrieve.
+  int64 race_id = 1;
 }
 
 // Race represents a horse racing event.

@@ -70,6 +70,28 @@ paths:
           collectionFormat: multi
       tags:
         - Racing
+  /v1/races/{raceId}:
+    get:
+      summary: GetRace returns a specific race by its ID.
+      operationId: Racing_GetRace
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/racingRace'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+        - name: raceId
+          description: The ID of the race to retrieve.
+          in: path
+          required: true
+          type: string
+          format: int64
+      tags:
+        - Racing
 definitions:
   ListRacesRequestOrderBy:
     type: string
