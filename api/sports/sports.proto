@@ -1,0 +1,157 @@
+syntax = "proto3";
+package sports;
+
+option go_package = "github.com/danilvpetrov/entain/api/sports";
+
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+// Sports service provides operations for managing sports events.
+service Sports {
+  // ListEvents returns a list of all sports events.
+  rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {
+    option (google.api.http) = {
+      get : "/v1/sport_events"
+    };
+  }
+
+  // GetEvent returns a specific sport event by its ID.
+  rpc GetEvent(GetEventRequest) returns (Event) {
+    option (google.api.http) = {
+      get : "/v1/sport_events/{event_id}"
+    };
+  }
+}
+
+// ListEventsRequest represents a request for the ListEvents call.
+message ListEventsRequest {
+  // EventTypeId is an optional list of event type IDs to filter the events.
+  repeated int64 event_type_id = 1;
+
+  // VisibleOnly indicates whether to return only visible events.
+  bool visible_only = 2;
+
+  enum OrderBy {
+    // UNSPECIFIED indicates no specific ordering.
+    UNSPECIFIED = 0;
+    // ADVERTISED_START_TIME_ASC orders by advertised start time in
+    // ascending order.
+    ADVERTISED_START_TIME_ASC = 1;
+    // ADVERTISED_START_TIME_DESC orders by advertised start time in
+    // descending order.
+    ADVERTISED_START_TIME_DESC = 2;
+    // NAME_ASC orders by sports event name in ascending order.
+    NAME_ASC = 3;
+    // NAME_DESC orders by sports event name in descending order.
+    NAME_DESC = 4;
+    // COMPETITION_ASC orders by competition name in ascending order.
+    COMPETITION_ASC = 5;
+    // COMPETITION_DESC orders by competition name in descending order.
+    COMPETITION_DESC = 6;
+  }
+
+  // OrderBy specifies the ordering of the returned events.
+  repeated OrderBy order_by = 3;
+}
+
+// ListEventsResponse represents a response to the ListEvents call.
+message ListEventsResponse {
+  // Events is a list of sports events.
+  repeated Event events = 1;
+}
+
+// GetEventRequest represents a request for the GetEvent call.
+message GetEventRequest {
+  // The ID of the sports event to retrieve.
+  int64 event_id = 1;
+}
+
+// Event represents a sports event.
+message Event {
+  // ID represents a unique identifier for the event.
+  int64 id = 1;
+
+  // Name is the official name given to the event.
+  string name = 3;
+
+  enum Category {
+    // UNSPECIFIED_CATEGORY indicates no specific category.
+    UNSPECIFIED_CATEGORY = 0;
+    // AMERICAN_FOOTBALL represents the American Football category.
+    AMERICAN_FOOTBALL = 1;
+    // AUSTRALIAN_RULES represents the Australian Rules category.
+    AUSTRALIAN_RULES = 2;
+    // BADMINTON represents the Badminton category.
+    BADMINTON = 3;
+    // BASEBALL represents the Baseball category.
+    BASEBALL = 4;
+    // BASKETBALL represents the Basketball category.
+    BASKETBALL = 5;
+    // BOXING represents the Boxing category.
+    BOXING = 6;
+    // CRICKET represents the Cricket category.
+    CRICKET = 7;
+    // CYCLING represents the Cycling category.
+    CYCLING = 8;
+    // DARTS represents the Darts category.
+    DARTS = 9;
+    // ESPORTS represents the Esports category.
+    ESPORTS = 10;
+    // GAELIC_SPORTS represents the Gaelic Sports category.
+    GAELIC_SPORTS = 11;
+    // GOLF represents the Golf category.
+    GOLF = 12;
+    // HANDBALL represents the Handball category.
+    HANDBALL = 13;
+    // ICE_HOCKEY represents the Ice Hockey category.
+    ICE_HOCKEY = 14;
+    // MOTOR_SPORT represents the Motor Sport category.
+    MOTOR_SPORT = 15;
+    // NETBALL represents the Netball category.
+    NETBALL = 16;
+    // NOVELTY represents the Novelty category.
+    NOVELTY = 17;
+    // POLITICS represents the Politics category.
+    POLITICS = 18;
+    // POOL represents the Pool category.
+    POOL = 19;
+    // RUGBY_LEAGUE represents the Rugby League category.
+    RUGBY_LEAGUE = 20;
+    // RUGBY_UNION represents the Rugby Union category.
+    RUGBY_UNION = 21;
+    // SNOOKER represents the Snooker category.
+    SNOOKER = 22;
+    // SOCCER represents the Soccer category.
+    SOCCER = 23;
+    // TABLE_TENNIS represents the Table Tennis category.
+    TABLE_TENNIS = 24;
+    // TENNIS represents the Tennis category.
+    TENNIS = 25;
+    // MIXED_MARTIAL_ARTS represents the Mixed Martial Arts category.
+    MIXED_MARTIAL_ARTS = 26;
+    // VOLLEYBALL represents the Volleyball category.
+    VOLLEYBALL = 27;
+  }
+
+  // Category represents the category of the event.
+  Category category = 4;
+
+  string competition = 5;
+
+  // Visible represents whether or not the event is visible.
+  bool visible = 6;
+  // AdvertisedStartTime is the time the event is advertised to run.
+  google.protobuf.Timestamp advertised_start_time = 7;
+
+  // Status represents the current status of the event.
+  enum Status {
+    UNSPECIFIED_STATUS = 0;
+    // OPEN indicates the event is open for betting.
+    OPEN = 1;
+    // CLOSED indicates the event is closed for betting.
+    CLOSED = 2;
+  }
+
+  // Status represents the current status of the event.
+  Status status = 8;
+}

@@ -8,7 +8,7 @@ import "google/api/annotations.proto";
 
 // Racing service provides operations for managing horse racing events.
 service Racing {
-  // ListRaces returns a list of all races. It can be filtered by meeting IDs.
+  // ListRaces returns a list of all races.
   rpc ListRaces(ListRacesRequest) returns (ListRacesResponse) {
     option (google.api.http) = {
       get : "/v1/races"

@@ -1,0 +1,527 @@
+[
+  {
+    "name": "Adam Linek vs Wojciech Gronowski",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Adelaide Crows (W) vs Sydney Swans (W)",
+    "category": "AUSTRALIAN_RULES",
+    "competition": "AFLW"
+  },
+  {
+    "name": "Anders Antonsen vs Jonatan Christie",
+    "category": "BADMINTON",
+    "competition": "Korea Open Men's"
+  },
+  {
+    "name": "Athletics vs Kansas City Royals",
+    "category": "BASEBALL",
+    "competition": "MLB"
+  },
+  {
+    "name": "B. Bonzi/T. Griekspoor vs S. Doumbia/F. Reboul",
+    "category": "TENNIS",
+    "competition": "ATP Beijing"
+  },
+  {
+    "name": "Blaublitz Akita vs V-Varen Nagasaki",
+    "category": "SOCCER",
+    "competition": "Japanese J2 League"
+  },
+  {
+    "name": "Briobecca Urayasu SC vs YSCC Yokohama",
+    "category": "SOCCER",
+    "competition": "Japanese Football League"
+  },
+  {
+    "name": "Busan Transportation Corporation vs Gimhae FC",
+    "category": "SOCCER",
+    "competition": "South Korean K3 League"
+  },
+  {
+    "name": "CSD Dorados Sinaloa vs Club Jaiba Brava",
+    "category": "SOCCER",
+    "competition": "Liga de Expansion MX, Apertura"
+  },
+  {
+    "name": "Club America Mexico vs Pumas de la UNAM",
+    "category": "SOCCER",
+    "competition": "Mexican Primera Division"
+  },
+  {
+    "name": "Colorado vs BYU",
+    "category": "AMERICAN_FOOTBALL",
+    "competition": "NCAAF"
+  },
+  {
+    "name": "Colorados de SLRC vs Mineros de Cananea",
+    "category": "BASKETBALL",
+    "competition": "Mexican CIBAPAC"
+  },
+  {
+    "name": "Denso Iris Women vs Aisin AW Wings Women",
+    "category": "BASKETBALL",
+    "competition": "Women's"
+  },
+  {
+    "name": "Diavoloso Hiroshima (Women) vs FC Imabari (Women)",
+    "category": "SOCCER",
+    "competition": "Women"
+  },
+  {
+    "name": "Elena Rybakina vs Eva Lys",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "Eliot Spizzirri vs Alex Bolt",
+    "category": "TENNIS",
+    "competition": "Jingshan Challenger"
+  },
+  {
+    "name": "Frayles de Guasave vs Guaycuras de La Paz",
+    "category": "BASKETBALL",
+    "competition": "Mexican CIBAPAC"
+  },
+  {
+    "name": "Fukushima United FC vs AC Nagano Parceiro",
+    "category": "SOCCER",
+    "competition": "Japanese J3 League"
+  },
+  {
+    "name": "Gijang United FC vs Jinju Citizen FC",
+    "category": "SOCCER",
+    "competition": "K4 League"
+  },
+  {
+    "name": "Hanshin Tigers vs Chunichi Dragons",
+    "category": "BASEBALL",
+    "competition": "Japan - NPB League"
+  },
+  {
+    "name": "Hanwha Life Esports vs Gen.G (Bo5)",
+    "category": "ESPORTS",
+    "competition": "LOL - LCK"
+  },
+  {
+    "name": "Hawaii Women vs UC Davis Women",
+    "category": "VOLLEYBALL",
+    "competition": "NCAA Women's"
+  },
+  {
+    "name": "Hokkaido Yellow Stars vs VC Nagano Tridents",
+    "category": "VOLLEYBALL",
+    "competition": "Club Friendlies"
+  },
+  {
+    "name": "Janice Tjen vs Kyoka Okamura",
+    "category": "TENNIS",
+    "competition": "WTA Suzhou"
+  },
+  {
+    "name": "Jenson Brooksby vs Holger Rune",
+    "category": "TENNIS",
+    "competition": "ATP Tokyo"
+  },
+  {
+    "name": "Joanna Garland vs Linda Fruhvirtova",
+    "category": "TENNIS",
+    "competition": "WTA Suzhou"
+  },
+  {
+    "name": "Karol Dzida vs Kacper Marchlewski",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Kiwoom Heroes vs Samsung Lions",
+    "category": "BASEBALL",
+    "competition": "KBO League"
+  },
+  {
+    "name": "Kowloon Cricket Club vs Wong Tai Sin",
+    "category": "SOCCER",
+    "competition": "Hong Kong Division 2"
+  },
+  {
+    "name": "Kwong Wah vs Fukien",
+    "category": "SOCCER",
+    "competition": "Hong Kong Division 2"
+  },
+  {
+    "name": "Lazio (TOMMY) - Atalanta (luxiqq) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Leylah Annie Fernandez vs Coco Gauff",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "M. Joint/C. Mcnally vs E. Hozumi/F.-H. Wu",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "Mateusz Czernik vs Grzegorz Poliniewicz",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Matsumoto Yamaga FC vs Tochigi SC",
+    "category": "SOCCER",
+    "competition": "Japanese J3 League"
+  },
+  {
+    "name": "Mccartney Kessler vs Barbora Krejcikova",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "Michal Piekarczyk vs Adam Duch",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "Mito Hollyhock vs Fujieda MYFC",
+    "category": "SOCCER",
+    "competition": "Japanese J2 League"
+  },
+  {
+    "name": "Namyangju Citizen vs Sejong SA FC",
+    "category": "SOCCER",
+    "competition": "K4 League"
+  },
+  {
+    "name": "Nao Hibino vs Eunhye Lee",
+    "category": "TENNIS",
+    "competition": "ITF Women Incheon"
+  },
+  {
+    "name": "Napoli (BiBiB) - Roma (Sava) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Nihon University vs Tsukuba FC",
+    "category": "SOCCER",
+    "competition": "Regional Leagues"
+  },
+  {
+    "name": "Northland v Canterbury",
+    "category": "RUGBY_UNION",
+    "competition": "New Zealand NPC"
+  },
+  {
+    "name": "Orix Buffaloes vs Tohoku Rakuten Golden Eagles",
+    "category": "BASEBALL",
+    "competition": "Japan - NPB League"
+  },
+  {
+    "name": "Pyeongtaek Citizen FC vs Dangjin Citizen",
+    "category": "SOCCER",
+    "competition": "K4 League"
+  },
+  {
+    "name": "Red Eagles Hokkaido vs Yokohama Grits",
+    "category": "ICE_HOCKEY",
+    "competition": "Asia League"
+  },
+  {
+    "name": "Reyes de Durango vs Colosos Basket",
+    "category": "BASKETBALL",
+    "competition": "Mexican CIBAPAC"
+  },
+  {
+    "name": "Se Young An vs Akane Yamaguchi",
+    "category": "BADMINTON",
+    "competition": "Korea Open Women's"
+  },
+  {
+    "name": "Seattle Sounders vs Vancouver Whitecaps",
+    "category": "SOCCER",
+    "competition": "US Major League Soccer"
+  },
+  {
+    "name": "Seibu Lions vs Fukuoka Softbank Hawks",
+    "category": "BASEBALL",
+    "competition": "Japan - NPB League"
+  },
+  {
+    "name": "Sham Shui Po SA vs Yuen Long FC",
+    "category": "SOCCER",
+    "competition": "Hong Kong Division 1"
+  },
+  {
+    "name": "Shihomi Li Xuan Leong vs Vlada Mincheva",
+    "category": "TENNIS",
+    "competition": "ITF Men Gurugram"
+  },
+  {
+    "name": "Shinagawa City Club vs Tachikawa Dice",
+    "category": "BASKETBALL",
+    "competition": "B3.League"
+  },
+  {
+    "name": "South Australia Women vs Tasmania Women",
+    "category": "CRICKET",
+    "competition": "Australian Women's National Cricket League"
+  },
+  {
+    "name": "Sydney Kings vs Cairns Taipans",
+    "category": "BASKETBALL",
+    "competition": "NBL"
+  },
+  {
+    "name": "Toin University of Yokohama vs Toho Titanium SC",
+    "category": "SOCCER",
+    "competition": "Regional Leagues"
+  },
+  {
+    "name": "Tokyo Musashino United FC vs Asuka FC",
+    "category": "SOCCER",
+    "competition": "Japanese Football League"
+  },
+  {
+    "name": "UE Lady Warriors Women vs UP Lady Maroons Women",
+    "category": "BASKETBALL",
+    "competition": "UAAP Women's"
+  },
+  {
+    "name": "Victoria Women vs New South Wales Women",
+    "category": "CRICKET",
+    "competition": "Australian Women's National Cricket League"
+  },
+  {
+    "name": "Vitold Buczynski vs Sylwester Mista",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Vonds Ichihara FC vs Tokyo 23 FC",
+    "category": "SOCCER",
+    "competition": "Regional Leagues"
+  },
+  {
+    "name": "Y. Xu/Z. Yang vs A. Krueger/J. Pegula",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "Yamato Sylphid (Women) vs Fujizakura Yamanashi (Women)",
+    "category": "SOCCER",
+    "competition": "Women"
+  },
+  {
+    "name": "Doosan Bears vs Lotte Giants",
+    "category": "BASEBALL",
+    "competition": "KBO League"
+  },
+  {
+    "name": "Antelopes Nagoya Women vs Boshoku Sunshine Rabbits Women",
+    "category": "BASKETBALL",
+    "competition": "Women's"
+  },
+  {
+    "name": "Dragon Ranger Gaming vs JD Gaming (Bo5)",
+    "category": "ESPORTS",
+    "competition": "King of Glory - King Pro League"
+  },
+  {
+    "name": "Anadolu Efes (JustYS) - Olympiacos (TIMI88) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eBasketball - EPC"
+  },
+  {
+    "name": "Lazio (TOMMY) - Napoli (BiBiB) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Atalanta (luxiqq) - Juventus (Galikooo) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Brisbane Broncos vs Penrith Panthers",
+    "category": "RUGBY_LEAGUE",
+    "competition": "NRL"
+  },
+  {
+    "name": "Wwfk Trading Limited vs Chandler Lambert",
+    "category": "SOCCER",
+    "competition": "Hong Kong Division 3"
+  },
+  {
+    "name": "FC Ise-Shima vs Wyvern FC",
+    "category": "SOCCER",
+    "competition": "Regional Leagues"
+  },
+  {
+    "name": "Verspah Oita vs Criacao Shinjuku",
+    "category": "SOCCER",
+    "competition": "Japanese Football League"
+  },
+  {
+    "name": "Kataller Toyama vs Tokushima Vortis",
+    "category": "SOCCER",
+    "competition": "Japanese J2 League"
+  },
+  {
+    "name": "Ales Langer vs Adam Martin Rek",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "Rafal Skotniczny vs Wojciech Urban",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Marian Lebek vs Piotr Przewlocki",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Karel Brozik vs Jiri Pozarsky",
+    "category": "TABLE_TENNIS",
+    "competition": "Czech Liga Pro"
+  },
+  {
+    "name": "Oleksandr Kolisnyk vs Martin Huk",
+    "category": "TABLE_TENNIS",
+    "competition": "Czech Liga Pro"
+  },
+  {
+    "name": "Julius Didi vs Milan Vrabec",
+    "category": "TABLE_TENNIS",
+    "competition": "Czech Liga Pro"
+  },
+  {
+    "name": "Petr Saleny vs Jan Sucharda",
+    "category": "TABLE_TENNIS",
+    "competition": "Czech Liga Pro"
+  },
+  {
+    "name": "Bartosz Bilski vs Marek Chybinski",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "Piotr Staniszewski vs Maciej Sinicki",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Adrian Mannarino vs Lorenzo Musetti",
+    "category": "TENNIS",
+    "competition": "ATP Beijing"
+  },
+  {
+    "name": "A. Erler/R. Galloway vs H. Nys/E. Roger-Vasselin",
+    "category": "TENNIS",
+    "competition": "ATP Tokyo"
+  },
+  {
+    "name": "Czech Republic vs Poland",
+    "category": "VOLLEYBALL",
+    "competition": "World Championship"
+  },
+  {
+    "name": "Roma (Sava) - Napoli (BiBiB) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Atalanta (luxiqq) - Lazio (TOMMY) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Mateusz Baran vs Michal Szostak",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "Pedro Rodriguez vs Leon Jose Garcia",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "Ondrej Fiklik vs David Vesecky",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "Grzegorz Poliniewicz vs Krzysztof Marcinowski",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Veronika Kudermetova vs Marie Bouzkova",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "Sara Victoria Balan vs Chelsea Fontenel",
+    "category": "TENNIS",
+    "competition": "ITF Women Bucharest"
+  },
+  {
+    "name": "Adelaide 36ers vs Brisbane Bullets",
+    "category": "BASKETBALL",
+    "competition": "NBL"
+  },
+  {
+    "name": "Barcelona (Zero) - Olympiacos (TIMI88) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eBasketball - EPC"
+  },
+  {
+    "name": "Grzegorz Adamiak vs Bartosz Czerwinski",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Mariusz Koczyba vs Sebastian Szostok",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Vitold Buczynski vs Jaroslaw Badura",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Milos Frydl vs Jan Vonasek",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "W. H. Kim/S. J. Seo vs  F. Alfian/M. S. Fikri",
+    "category": "BADMINTON",
+    "competition": "Korea Open Men's Doubles"
+  },
+  {
+    "name": "Juventus (Galikooo) - Roma (Sava) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Atalanta (luxiqq) - Napoli (BiBiB) (Bo1)",
+    "category": "ESPORTS",
+    "competition": "eSoccer - EPC"
+  },
+  {
+    "name": "Lukas Soucek vs David Jicha",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Cup - Men - Singles"
+  },
+  {
+    "name": "Mateusz Woskowicz vs Karol Dzida",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  }
+]

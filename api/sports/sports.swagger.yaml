@@ -1,0 +1,240 @@
+swagger: "2.0"
+info:
+  title: api/sports/sports.proto
+  version: version not set
+tags:
+  - name: Sports
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v1/sport_events:
+    get:
+      summary: ListEvents returns a list of all sports events.
+      operationId: Sports_ListEvents
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/sportsListEventsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+        - name: eventTypeId
+          description: EventTypeId is an optional list of event type IDs to filter the events.
+          in: query
+          required: false
+          type: array
+          items:
+            type: string
+            format: int64
+          collectionFormat: multi
+        - name: visibleOnly
+          description: VisibleOnly indicates whether to return only visible events.
+          in: query
+          required: false
+          type: boolean
+        - name: orderBy
+          description: |-
+            OrderBy specifies the ordering of the returned events.
+
+             - UNSPECIFIED: UNSPECIFIED indicates no specific ordering.
+             - ADVERTISED_START_TIME_ASC: ADVERTISED_START_TIME_ASC orders by advertised start time in
+            ascending order.
+             - ADVERTISED_START_TIME_DESC: ADVERTISED_START_TIME_DESC orders by advertised start time in
+            descending order.
+             - NAME_ASC: NAME_ASC orders by sports event name in ascending order.
+             - NAME_DESC: NAME_DESC orders by sports event name in descending order.
+             - COMPETITION_ASC: COMPETITION_ASC orders by competition name in ascending order.
+             - COMPETITION_DESC: COMPETITION_DESC orders by competition name in descending order.
+          in: query
+          required: false
+          type: array
+          items:
+            type: string
+            enum:
+              - UNSPECIFIED
+              - ADVERTISED_START_TIME_ASC
+              - ADVERTISED_START_TIME_DESC
+              - NAME_ASC
+              - NAME_DESC
+              - COMPETITION_ASC
+              - COMPETITION_DESC
+          collectionFormat: multi
+      tags:
+        - Sports
+  /v1/sport_events/{eventId}:
+    get:
+      summary: GetEvent returns a specific sport event by its ID.
+      operationId: Sports_GetEvent
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/sportsEvent'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/googlerpcStatus'
+      parameters:
+        - name: eventId
+          description: The ID of the sports event to retrieve.
+          in: path
+          required: true
+          type: string
+          format: int64
+      tags:
+        - Sports
+definitions:
+  EventCategory:
+    type: string
+    enum:
+      - UNSPECIFIED_CATEGORY
+      - AMERICAN_FOOTBALL
+      - AUSTRALIAN_RULES
+      - BADMINTON
+      - BASEBALL
+      - BASKETBALL
+      - BOXING
+      - CRICKET
+      - CYCLING
+      - DARTS
+      - ESPORTS
+      - GAELIC_SPORTS
+      - GOLF
+      - HANDBALL
+      - ICE_HOCKEY
+      - MOTOR_SPORT
+      - NETBALL
+      - NOVELTY
+      - POLITICS
+      - POOL
+      - RUGBY_LEAGUE
+      - RUGBY_UNION
+      - SNOOKER
+      - SOCCER
+      - TABLE_TENNIS
+      - TENNIS
+      - MIXED_MARTIAL_ARTS
+      - VOLLEYBALL
+    default: UNSPECIFIED_CATEGORY
+    description: |2-
+       - UNSPECIFIED_CATEGORY: UNSPECIFIED_CATEGORY indicates no specific category.
+       - AMERICAN_FOOTBALL: AMERICAN_FOOTBALL represents the American Football category.
+       - AUSTRALIAN_RULES: AUSTRALIAN_RULES represents the Australian Rules category.
+       - BADMINTON: BADMINTON represents the Badminton category.
+       - BASEBALL: BASEBALL represents the Baseball category.
+       - BASKETBALL: BASKETBALL represents the Basketball category.
+       - BOXING: BOXING represents the Boxing category.
+       - CRICKET: CRICKET represents the Cricket category.
+       - CYCLING: CYCLING represents the Cycling category.
+       - DARTS: DARTS represents the Darts category.
+       - ESPORTS: ESPORTS represents the Esports category.
+       - GAELIC_SPORTS: GAELIC_SPORTS represents the Gaelic Sports category.
+       - GOLF: GOLF represents the Golf category.
+       - HANDBALL: HANDBALL represents the Handball category.
+       - ICE_HOCKEY: ICE_HOCKEY represents the Ice Hockey category.
+       - MOTOR_SPORT: MOTOR_SPORT represents the Motor Sport category.
+       - NETBALL: NETBALL represents the Netball category.
+       - NOVELTY: NOVELTY represents the Novelty category.
+       - POLITICS: POLITICS represents the Politics category.
+       - POOL: POOL represents the Pool category.
+       - RUGBY_LEAGUE: RUGBY_LEAGUE represents the Rugby League category.
+       - RUGBY_UNION: RUGBY_UNION represents the Rugby Union category.
+       - SNOOKER: SNOOKER represents the Snooker category.
+       - SOCCER: SOCCER represents the Soccer category.
+       - TABLE_TENNIS: TABLE_TENNIS represents the Table Tennis category.
+       - TENNIS: TENNIS represents the Tennis category.
+       - MIXED_MARTIAL_ARTS: MIXED_MARTIAL_ARTS represents the Mixed Martial Arts category.
+       - VOLLEYBALL: VOLLEYBALL represents the Volleyball category.
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/protobufAny'
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  sportsEvent:
+    type: object
+    properties:
+      id:
+        type: string
+        format: int64
+        description: ID represents a unique identifier for the event.
+      name:
+        type: string
+        description: Name is the official name given to the event.
+      category:
+        $ref: '#/definitions/EventCategory'
+        description: Category represents the category of the event.
+      competition:
+        type: string
+      visible:
+        type: boolean
+        description: Visible represents whether or not the event is visible.
+      advertisedStartTime:
+        type: string
+        format: date-time
+        description: AdvertisedStartTime is the time the event is advertised to run.
+      status:
+        $ref: '#/definitions/sportsEventStatus'
+        description: Status represents the current status of the event.
+    description: Event represents a sports event.
+  sportsEventStatus:
+    type: string
+    enum:
+      - UNSPECIFIED_STATUS
+      - OPEN
+      - CLOSED
+    default: UNSPECIFIED_STATUS
+    description: |-
+      Status represents the current status of the event.
+
+       - OPEN: OPEN indicates the event is open for betting.
+       - CLOSED: CLOSED indicates the event is closed for betting.
+  sportsListEventsRequestOrderBy:
+    type: string
+    enum:
+      - UNSPECIFIED
+      - ADVERTISED_START_TIME_ASC
+      - ADVERTISED_START_TIME_DESC
+      - NAME_ASC
+      - NAME_DESC
+      - COMPETITION_ASC
+      - COMPETITION_DESC
+    default: UNSPECIFIED
+    description: |2-
+       - UNSPECIFIED: UNSPECIFIED indicates no specific ordering.
+       - ADVERTISED_START_TIME_ASC: ADVERTISED_START_TIME_ASC orders by advertised start time in
+      ascending order.
+       - ADVERTISED_START_TIME_DESC: ADVERTISED_START_TIME_DESC orders by advertised start time in
+      descending order.
+       - NAME_ASC: NAME_ASC orders by sports event name in ascending order.
+       - NAME_DESC: NAME_DESC orders by sports event name in descending order.
+       - COMPETITION_ASC: COMPETITION_ASC orders by competition name in ascending order.
+       - COMPETITION_DESC: COMPETITION_DESC orders by competition name in descending order.
+  sportsListEventsResponse:
+    type: object
+    properties:
+      events:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/sportsEvent'
+        description: Events is a list of sports events.
+    description: ListEventsResponse represents a response to the ListEvents call.

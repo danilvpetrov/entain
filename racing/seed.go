@@ -15,7 +15,7 @@ const (
 
 // SeedTestData seeds the database with test data.
 // This function is intended to be used in tests only. Please avoid using it
-// in a production setupp.
+// in a production setup.
 func SeedTestData(ctx context.Context, db *sql.DB) error {
 	for i := range NumberOfSeededRaces {
 		if _, err := db.ExecContext(

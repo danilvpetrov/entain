@@ -11,7 +11,7 @@ produces:
 paths:
   /v1/races:
     get:
-      summary: ListRaces returns a list of all races. It can be filtered by meeting IDs.
+      summary: ListRaces returns a list of all races.
       operationId: Racing_ListRaces
       responses:
         "200":
@@ -93,7 +93,26 @@ paths:
       tags:
         - Racing
 definitions:
-  ListRacesRequestOrderBy:
+  googlerpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          $ref: '#/definitions/protobufAny'
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  racingListRacesRequestOrderBy:
     type: string
     enum:
       - UNSPECIFIED
@@ -118,25 +137,6 @@ definitions:
        - NAME_DESC: NAME_DESC orders by race name in descending order.
        - MEETING_ID_ASC: MEETING_ID_ASC orders by meeting ID in ascending order.
        - MEETING_ID_DESC: MEETING_ID_DESC orders by meeting ID in descending order.
-  googlerpcStatus:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      message:
-        type: string
-      details:
-        type: array
-        items:
-          type: object
-          $ref: '#/definitions/protobufAny'
-  protobufAny:
-    type: object
-    properties:
-      '@type':
-        type: string
-    additionalProperties: {}
   racingListRacesResponse:
     type: object
     properties:

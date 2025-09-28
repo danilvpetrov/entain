@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS races (
 CREATE INDEX IF NOT EXISTS idx_races_meeting_id ON races(meeting_id);
 
 -- Add an index on visible to optimize query filtering by this column
-CREATE INDEX IF NOT EXISTS idx_visible ON races(visible);
+CREATE INDEX IF NOT EXISTS idx_races_visible ON races(visible);

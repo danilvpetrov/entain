@@ -29,7 +29,7 @@ const (
 //
 // Racing service provides operations for managing horse racing events.
 type RacingClient interface {
-	// ListRaces returns a list of all races. It can be filtered by meeting IDs.
+	// ListRaces returns a list of all races.
 	ListRaces(ctx context.Context, in *ListRacesRequest, opts ...grpc.CallOption) (*ListRacesResponse, error)
 	// GetRace returns a specific race by its ID.
 	GetRace(ctx context.Context, in *GetRaceRequest, opts ...grpc.CallOption) (*Race, error)
@@ -69,7 +69,7 @@ func (c *racingClient) GetRace(ctx context.Context, in *GetRaceRequest, opts ...
 //
 // Racing service provides operations for managing horse racing events.
 type RacingServer interface {
-	// ListRaces returns a list of all races. It can be filtered by meeting IDs.
+	// ListRaces returns a list of all races.
 	ListRaces(context.Context, *ListRacesRequest) (*ListRacesResponse, error)
 	// GetRace returns a specific race by its ID.
 	GetRace(context.Context, *GetRaceRequest) (*Race, error)
