@@ -208,6 +208,27 @@ definitions:
        - TENNIS: TENNIS represents the Tennis category.
        - MIXED_MARTIAL_ARTS: MIXED_MARTIAL_ARTS represents the Mixed Martial Arts category.
        - VOLLEYBALL: VOLLEYBALL represents the Volleyball category.
+  ListEventsRequestOrderBy:
+    type: string
+    enum:
+      - UNSPECIFIED
+      - ADVERTISED_START_TIME_ASC
+      - ADVERTISED_START_TIME_DESC
+      - NAME_ASC
+      - NAME_DESC
+      - COMPETITION_ASC
+      - COMPETITION_DESC
+    default: UNSPECIFIED
+    description: |2-
+       - UNSPECIFIED: UNSPECIFIED indicates no specific ordering.
+       - ADVERTISED_START_TIME_ASC: ADVERTISED_START_TIME_ASC orders by advertised start time in
+      ascending order.
+       - ADVERTISED_START_TIME_DESC: ADVERTISED_START_TIME_DESC orders by advertised start time in
+      descending order.
+       - NAME_ASC: NAME_ASC orders by sports event name in ascending order.
+       - NAME_DESC: NAME_DESC orders by sports event name in descending order.
+       - COMPETITION_ASC: COMPETITION_ASC orders by competition name in ascending order.
+       - COMPETITION_DESC: COMPETITION_DESC orders by competition name in descending order.
   googlerpcStatus:
     type: object
     properties:
@@ -265,27 +286,6 @@ definitions:
 
        - OPEN: OPEN indicates the event is open for betting.
        - CLOSED: CLOSED indicates the event is closed for betting.
-  sportsListEventsRequestOrderBy:
-    type: string
-    enum:
-      - UNSPECIFIED
-      - ADVERTISED_START_TIME_ASC
-      - ADVERTISED_START_TIME_DESC
-      - NAME_ASC
-      - NAME_DESC
-      - COMPETITION_ASC
-      - COMPETITION_DESC
-    default: UNSPECIFIED
-    description: |2-
-       - UNSPECIFIED: UNSPECIFIED indicates no specific ordering.
-       - ADVERTISED_START_TIME_ASC: ADVERTISED_START_TIME_ASC orders by advertised start time in
-      ascending order.
-       - ADVERTISED_START_TIME_DESC: ADVERTISED_START_TIME_DESC orders by advertised start time in
-      descending order.
-       - NAME_ASC: NAME_ASC orders by sports event name in ascending order.
-       - NAME_DESC: NAME_DESC orders by sports event name in descending order.
-       - COMPETITION_ASC: COMPETITION_ASC orders by competition name in ascending order.
-       - COMPETITION_DESC: COMPETITION_DESC orders by competition name in descending order.
   sportsListEventsResponse:
     type: object
     properties:
