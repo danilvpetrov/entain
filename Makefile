@@ -31,6 +31,10 @@ run-gateway:
 run-racing:
 	go run ./cmd/racing
 
+.PHONY: run-sports
+run-sports:
+	go run ./cmd/sports
+
 .PHONY: import-sports-events
 import-sports-events:
 	go run ./sports/testdata

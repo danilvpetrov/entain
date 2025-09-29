@@ -301,7 +301,7 @@ func (Event_Status) EnumDescriptor() ([]byte, []int) {
 type ListEventsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// EventTypeId is an optional list of event type IDs to filter the events.
-	EventTypeId []int64 `protobuf:"varint,1,rep,packed,name=event_type_id,json=eventTypeId,proto3" json:"event_type_id,omitempty"`
+	EventCategory []Event_Category `protobuf:"varint,1,rep,packed,name=event_category,json=eventCategory,proto3,enum=sports.Event_Category" json:"event_category,omitempty"`
 	// VisibleOnly indicates whether to return only visible events.
 	VisibleOnly bool `protobuf:"varint,2,opt,name=visible_only,json=visibleOnly,proto3" json:"visible_only,omitempty"`
 	// OrderBy specifies the ordering of the returned events.
@@ -340,9 +340,9 @@ func (*ListEventsRequest) Descriptor() ([]byte, []int) {
 	return file_api_sports_sports_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListEventsRequest) GetEventTypeId() []int64 {
+func (x *ListEventsRequest) GetEventCategory() []Event_Category {
 	if x != nil {
-		return x.EventTypeId
+		return x.EventCategory
 	}
 	return nil
 }
@@ -556,9 +556,9 @@ var File_api_sports_sports_proto protoreflect.FileDescriptor
 
 const file_api_sports_sports_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/sports/sports.proto\x12\x06sports\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xbc\x02\n" +
-	"\x11ListEventsRequest\x12\"\n" +
-	"\revent_type_id\x18\x01 \x03(\x03R\veventTypeId\x12!\n" +
+	"\x17api/sports/sports.proto\x12\x06sports\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xd7\x02\n" +
+	"\x11ListEventsRequest\x12=\n" +
+	"\x0eevent_category\x18\x01 \x03(\x0e2\x16.sports.Event.CategoryR\reventCategory\x12!\n" +
 	"\fvisible_only\x18\x02 \x01(\bR\vvisibleOnly\x12<\n" +
 	"\border_by\x18\x03 \x03(\x0e2!.sports.ListEventsRequest.OrderByR\aorderBy\"\xa1\x01\n" +
 	"\aOrderBy\x12\x0f\n" +
@@ -621,11 +621,12 @@ const file_api_sports_sports_proto_rawDesc = "" +
 	"\x12UNSPECIFIED_STATUS\x10\x00\x12\b\n" +
 	"\x04OPEN\x10\x01\x12\n" +
 	"\n" +
-	"\x06CLOSED\x10\x022\xc0\x01\n" +
-	"\x06Sports\x12]\n" +
+	"\x06CLOSED\x10\x022\xb4\x01\n" +
+	"\x06Sports\x12W\n" +
 	"\n" +
-	"ListEvents\x12\x19.sports.ListEventsRequest\x1a\x1a.sports.ListEventsResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/sport_events\x12W\n" +
-	"\bGetEvent\x12\x17.sports.GetEventRequest\x1a\r.sports.Event\"#\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1/sport_events/{event_id}B+Z)github.com/danilvpetrov/entain/api/sportsb\x06proto3"
+	"ListEvents\x12\x19.sports.ListEventsRequest\x1a\x1a.sports.ListEventsResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/v1/sports\x12Q\n" +
+	"\bGetEvent\x12\x17.sports.GetEventRequest\x1a\r.sports.Event\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/sports/{event_id}B+Z)github.com/danilvpetrov/entain/api/sportsb\x06proto3"
 
 var (
 	file_api_sports_sports_proto_rawDescOnce sync.Once
@@ -652,20 +653,21 @@ var file_api_sports_sports_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),  // 7: google.protobuf.Timestamp
 }
 var file_api_sports_sports_proto_depIdxs = []int32{
-	0, // 0: sports.ListEventsRequest.order_by:type_name -> sports.ListEventsRequest.OrderBy
-	6, // 1: sports.ListEventsResponse.events:type_name -> sports.Event
-	1, // 2: sports.Event.category:type_name -> sports.Event.Category
-	7, // 3: sports.Event.advertised_start_time:type_name -> google.protobuf.Timestamp
-	2, // 4: sports.Event.status:type_name -> sports.Event.Status
-	3, // 5: sports.Sports.ListEvents:input_type -> sports.ListEventsRequest
-	5, // 6: sports.Sports.GetEvent:input_type -> sports.GetEventRequest
-	4, // 7: sports.Sports.ListEvents:output_type -> sports.ListEventsResponse
-	6, // 8: sports.Sports.GetEvent:output_type -> sports.Event
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	1, // 0: sports.ListEventsRequest.event_category:type_name -> sports.Event.Category
+	0, // 1: sports.ListEventsRequest.order_by:type_name -> sports.ListEventsRequest.OrderBy
+	6, // 2: sports.ListEventsResponse.events:type_name -> sports.Event
+	1, // 3: sports.Event.category:type_name -> sports.Event.Category
+	7, // 4: sports.Event.advertised_start_time:type_name -> google.protobuf.Timestamp
+	2, // 5: sports.Event.status:type_name -> sports.Event.Status
+	3, // 6: sports.Sports.ListEvents:input_type -> sports.ListEventsRequest
+	5, // 7: sports.Sports.GetEvent:input_type -> sports.GetEventRequest
+	4, // 8: sports.Sports.ListEvents:output_type -> sports.ListEventsResponse
+	6, // 9: sports.Sports.GetEvent:output_type -> sports.Event
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_api_sports_sports_proto_init() }

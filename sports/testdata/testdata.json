@@ -523,5 +523,65 @@
     "name": "Mateusz Woskowicz vs Karol Dzida",
     "category": "TABLE_TENNIS",
     "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Dallas Cowboys vs Green Bay Packers",
+    "category": "AMERICAN_FOOTBALL",
+    "competition": "NFL"
+  },
+  {
+    "name": "Club Tijuana de Caliente vs Cruz Azul",
+    "category": "SOCCER",
+    "competition": "Mexican Primera Division"
+  },
+  {
+    "name": "Blaublitz Akita vs Grulla Morioka",
+    "category": "SOCCER",
+    "competition": "Club Friendlies (Domestic & International)"
+  },
+  {
+    "name": "Bartlomiej Mleczko vs Artur Szoltysek",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Jakub Pruszkowski vs Jakub Nowak",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Michal Malachowski vs Karol Wisniewski",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Jerzy Michalik vs Dawid Pyrek",
+    "category": "TABLE_TENNIS",
+    "competition": "TT Elite Series - Men"
+  },
+  {
+    "name": "Nicholas Jovanovski vs Jera Staley",
+    "category": "TENNIS",
+    "competition": "ITF Men Perth"
+  },
+  {
+    "name": "Mirra Andreeva vs Jessica Bouzas Maneiro",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "T. Mihalikova/O. Nicholls vs U. Eikeri/G. Olmos",
+    "category": "TENNIS",
+    "competition": "WTA Beijing"
+  },
+  {
+    "name": "G. Andreozzi/M. Guinard vs M. Arevalo/M. Pavic",
+    "category": "TENNIS",
+    "competition": "ATP Beijing"
+  },
+  {
+    "name": "Saisai Zheng vs Tatjana Maria",
+    "category": "TENNIS",
+    "competition": "WTA Suzhou"
   }
 ]

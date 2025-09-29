@@ -9,7 +9,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /v1/sport_events:
+  /v1/sports:
     get:
       summary: ListEvents returns a list of all sports events.
       operationId: Sports_ListEvents
@@ -23,14 +23,72 @@ paths:
           schema:
             $ref: '#/definitions/googlerpcStatus'
       parameters:
-        - name: eventTypeId
-          description: EventTypeId is an optional list of event type IDs to filter the events.
+        - name: eventCategory
+          description: |-
+            EventTypeId is an optional list of event type IDs to filter the events.
+
+             - UNSPECIFIED_CATEGORY: UNSPECIFIED_CATEGORY indicates no specific category.
+             - AMERICAN_FOOTBALL: AMERICAN_FOOTBALL represents the American Football category.
+             - AUSTRALIAN_RULES: AUSTRALIAN_RULES represents the Australian Rules category.
+             - BADMINTON: BADMINTON represents the Badminton category.
+             - BASEBALL: BASEBALL represents the Baseball category.
+             - BASKETBALL: BASKETBALL represents the Basketball category.
+             - BOXING: BOXING represents the Boxing category.
+             - CRICKET: CRICKET represents the Cricket category.
+             - CYCLING: CYCLING represents the Cycling category.
+             - DARTS: DARTS represents the Darts category.
+             - ESPORTS: ESPORTS represents the Esports category.
+             - GAELIC_SPORTS: GAELIC_SPORTS represents the Gaelic Sports category.
+             - GOLF: GOLF represents the Golf category.
+             - HANDBALL: HANDBALL represents the Handball category.
+             - ICE_HOCKEY: ICE_HOCKEY represents the Ice Hockey category.
+             - MOTOR_SPORT: MOTOR_SPORT represents the Motor Sport category.
+             - NETBALL: NETBALL represents the Netball category.
+             - NOVELTY: NOVELTY represents the Novelty category.
+             - POLITICS: POLITICS represents the Politics category.
+             - POOL: POOL represents the Pool category.
+             - RUGBY_LEAGUE: RUGBY_LEAGUE represents the Rugby League category.
+             - RUGBY_UNION: RUGBY_UNION represents the Rugby Union category.
+             - SNOOKER: SNOOKER represents the Snooker category.
+             - SOCCER: SOCCER represents the Soccer category.
+             - TABLE_TENNIS: TABLE_TENNIS represents the Table Tennis category.
+             - TENNIS: TENNIS represents the Tennis category.
+             - MIXED_MARTIAL_ARTS: MIXED_MARTIAL_ARTS represents the Mixed Martial Arts category.
+             - VOLLEYBALL: VOLLEYBALL represents the Volleyball category.
           in: query
           required: false
           type: array
           items:
             type: string
-            format: int64
+            enum:
+              - UNSPECIFIED_CATEGORY
+              - AMERICAN_FOOTBALL
+              - AUSTRALIAN_RULES
+              - BADMINTON
+              - BASEBALL
+              - BASKETBALL
+              - BOXING
+              - CRICKET
+              - CYCLING
+              - DARTS
+              - ESPORTS
+              - GAELIC_SPORTS
+              - GOLF
+              - HANDBALL
+              - ICE_HOCKEY
+              - MOTOR_SPORT
+              - NETBALL
+              - NOVELTY
+              - POLITICS
+              - POOL
+              - RUGBY_LEAGUE
+              - RUGBY_UNION
+              - SNOOKER
+              - SOCCER
+              - TABLE_TENNIS
+              - TENNIS
+              - MIXED_MARTIAL_ARTS
+              - VOLLEYBALL
           collectionFormat: multi
         - name: visibleOnly
           description: VisibleOnly indicates whether to return only visible events.
@@ -66,7 +124,7 @@ paths:
           collectionFormat: multi
       tags:
         - Sports
-  /v1/sport_events/{eventId}:
+  /v1/sports/{eventId}:
     get:
       summary: GetEvent returns a specific sport event by its ID.
       operationId: Sports_GetEvent

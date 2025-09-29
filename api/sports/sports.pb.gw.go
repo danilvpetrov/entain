@@ -121,7 +121,7 @@ func RegisterSportsHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/sports.Sports/ListEvents", runtime.WithHTTPPathPattern("/v1/sport_events"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/sports.Sports/ListEvents", runtime.WithHTTPPathPattern("/v1/sports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -141,7 +141,7 @@ func RegisterSportsHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/sports.Sports/GetEvent", runtime.WithHTTPPathPattern("/v1/sport_events/{event_id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/sports.Sports/GetEvent", runtime.WithHTTPPathPattern("/v1/sports/{event_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -199,7 +199,7 @@ func RegisterSportsHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/sports.Sports/ListEvents", runtime.WithHTTPPathPattern("/v1/sport_events"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/sports.Sports/ListEvents", runtime.WithHTTPPathPattern("/v1/sports"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -216,7 +216,7 @@ func RegisterSportsHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/sports.Sports/GetEvent", runtime.WithHTTPPathPattern("/v1/sport_events/{event_id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/sports.Sports/GetEvent", runtime.WithHTTPPathPattern("/v1/sports/{event_id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -233,8 +233,8 @@ func RegisterSportsHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 }
 
 var (
-	pattern_Sports_ListEvents_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "sport_events"}, ""))
-	pattern_Sports_GetEvent_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "sport_events", "event_id"}, ""))
+	pattern_Sports_ListEvents_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "sports"}, ""))
+	pattern_Sports_GetEvent_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "sports", "event_id"}, ""))
 )
 
 var (

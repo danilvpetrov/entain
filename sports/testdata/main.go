@@ -28,13 +28,13 @@ type Event struct {
 }
 
 // run is the main execution function that orchestrates fetching and storing
-// in-play sports events from the Ladbrokes API.
+// in-play sports events from the Ladbrokes API. It retrieves the list of sports
+// categories, fetches in-play events for each category, and stores thouse
+// events in a JSON file, deduplicating them against any existing events in
+// [testdataFile].
 //
 // This code is not pretty. It is intended to be run manually when additional
 // test data is required. Please avoid using it in a production setup.
-// It retrieves the list of sports categories, fetches in-play events for each
-// category, and stores thouse events in a JSON file, deduplicating them
-// against any existing events in [testdataFile].
 func run() error {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()

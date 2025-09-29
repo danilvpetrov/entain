@@ -9,6 +9,15 @@ import (
 	. "github.com/danilvpetrov/entain/racing"
 )
 
+const (
+	// maxAlphaValue is a string that is greater than any other string when
+	// compared lexicographically.
+	// It is used in tests to verify descending order.
+	// The length of the string is chosen to be sufficiently long to cover
+	// typical use cases.
+	maxAlphaValue = "zzzzzzzzzzzzzzzzzzzzzz"
+)
+
 func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 	s := &Service{
 		DB: setupDatabase(t),
@@ -228,7 +237,7 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 					t.Fatalf("expected no error, got %v", err)
 				}
 
-				name := "ZZZZZZZZZZZZZZZZZZZZ"
+				name := maxAlphaValue
 				for _, race := range resp.GetRaces() {
 					actual := race.GetName()
 					if actual > name {

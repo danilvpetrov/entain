@@ -10,7 +10,7 @@ import (
 	"syreclabs.com/go/faker"
 )
 
-// testDataEvent represents a sports event from testdata.
+// testDataEvent represents a sports event from testdata file.
 type testDataEvent struct {
 	Name        string `json:"name"`
 	Category    string `json:"category"`
@@ -22,8 +22,12 @@ type testDataEvent struct {
 //
 // This function is intended to be used in tests only. Please avoid using it in
 // a production setup.
-func SeedTestData(ctx context.Context, db *sql.DB) (int, error) {
-	raw, err := os.ReadFile("testdata/testdata.json")
+func SeedTestData(
+	ctx context.Context,
+	db *sql.DB,
+	testDataFile string,
+) (int, error) {
+	raw, err := os.ReadFile(testDataFile)
 	if err != nil {
 		return 0, err
 	}

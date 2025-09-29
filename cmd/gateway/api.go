@@ -16,5 +16,9 @@ func setupAPI(ctx context.Context) (*runtime.ServeMux, error) {
 		return nil, fmt.Errorf("error setting up racing service: %w", err)
 	}
 
+	if err := setupSportsService(ctx, m); err != nil {
+		return nil, fmt.Errorf("error setting up sports service: %w", err)
+	}
+
 	return m, nil
 }

@@ -11,14 +11,14 @@ service Sports {
   // ListEvents returns a list of all sports events.
   rpc ListEvents(ListEventsRequest) returns (ListEventsResponse) {
     option (google.api.http) = {
-      get : "/v1/sport_events"
+      get : "/v1/sports"
     };
   }
 
   // GetEvent returns a specific sport event by its ID.
   rpc GetEvent(GetEventRequest) returns (Event) {
     option (google.api.http) = {
-      get : "/v1/sport_events/{event_id}"
+      get : "/v1/sports/{event_id}"
     };
   }
 }
@@ -26,7 +26,7 @@ service Sports {
 // ListEventsRequest represents a request for the ListEvents call.
 message ListEventsRequest {
   // EventTypeId is an optional list of event type IDs to filter the events.
-  repeated int64 event_type_id = 1;
+  repeated Event.Category event_category = 1;
 
   // VisibleOnly indicates whether to return only visible events.
   bool visible_only = 2;
