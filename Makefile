@@ -53,11 +53,11 @@ run-gateway:
 
 .PHONY: run-racing
 run-racing:
-	go run ./cmd/racing
+	RACING_DB_PATH="artefacts/db/racing.db" go run ./cmd/racing
 
 .PHONY: run-sports
 run-sports:
-	go run ./cmd/sports
+	SPORTS_DB_PATH="artefacts/db/sports.db" go run ./cmd/sports
 
 .PHONY: import-sports-events
 import-sports-events:
@@ -68,4 +68,7 @@ precommit: test
 	go mod tidy
 	betteralign --apply -test_files ./...
 	golangci-lint run --fix ./...
+
+clean:
+	rm -rf artefacts
 

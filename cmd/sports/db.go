@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"os"
+	"path/filepath"
 
 	"github.com/danilvpetrov/entain/sports"
 	_ "github.com/mattn/go-sqlite3" // underscore import for the SQLite driver
@@ -11,18 +12,18 @@ import (
 
 var (
 	sportsDBPath        = os.Getenv("SPORTS_DB_PATH")
-	defaultSportsDBPath = "artefacts/sports.db"
+	defaultSportsDBPath = "sports.db"
 )
 
 // setupDB initialises the database connection and applies the necessary schema.
 func setupDB(ctx context.Context) (*sql.DB, error) {
 	if sportsDBPath == "" {
 		sportsDBPath = defaultSportsDBPath
-		// Make sure the artefacts directory exists if we are using the default
-		// path.
-		if err := os.MkdirAll("artefacts", os.ModePerm); err != nil {
-			return nil, err
-		}
+	}
+
+	// Make sure the directory exists.
+	if err := os.MkdirAll(filepath.Dir(sportsDBPath), os.ModePerm); err != nil {
+		return nil, err
 	}
 
 	db, err := sql.Open("sqlite3", sportsDBPath)
