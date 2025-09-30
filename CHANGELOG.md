@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OTEL tracing support was added for gateway, racing and sports services.
   The tracing can be enabled by setting the `OTEL_EXPORTER_OTLP_ENDPOINT`
   environment variable to the desired OTLP collector endpoint. For more details,
-  please refer to [tracing in README.md](./README.md#tracing).
+  please refer to [tracing in README.md](./README.md#otel-tracing).
 
 ## [v0.6.0] - 2025-09-29
 
