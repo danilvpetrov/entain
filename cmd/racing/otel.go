@@ -12,7 +12,10 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.24.0"
 )
 
-func openTelemetry(
+// setupOpenTelemetry sets up OpenTelemetry tracing. It returns a shutdown
+// function that should be called to flush any remaining spans before the
+// application exits.
+func setupOpenTelemetry(
 	ctx context.Context,
 ) (
 	shutdown func() error,

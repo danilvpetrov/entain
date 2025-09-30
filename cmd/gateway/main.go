@@ -26,7 +26,7 @@ func run() error {
 		return fmt.Errorf("error setting up logger: %w", err)
 	}
 
-	shutdown, err := openTelemetry(ctx)
+	shutdown, err := setupOpenTelemetry(ctx)
 	if err != nil {
 		return fmt.Errorf("error setting up OpenTelemetry: %w", err)
 	}
