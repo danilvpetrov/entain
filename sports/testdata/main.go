@@ -44,16 +44,17 @@ func run() error {
 	seen := map[string]bool{}
 
 	raw, err := os.ReadFile(testdataFile)
+	if err != nil {
+		return err
+	}
 
 	var events []Event
-	if err == nil {
-		if err := json.Unmarshal(raw, &events); err != nil {
-			return err
-		}
+	if err := json.Unmarshal(raw, &events); err != nil {
+		return err
+	}
 
-		for _, event := range events {
-			seen[event.Name] = true
-		}
+	for _, event := range events {
+		seen[event.Name] = true
 	}
 
 	categories, err := retrieveCategories(ctx)

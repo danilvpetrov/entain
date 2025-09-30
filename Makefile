@@ -83,6 +83,7 @@ artefacts/make/docker_jaeger.touch:
 		jaegertracing/all-in-one:latest
 	@touch "$@"
 
+.PHONY: clean
 clean:
 	rm -rf artefacts
 	docker rm --force jaeger || true
