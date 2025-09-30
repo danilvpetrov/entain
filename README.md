@@ -30,6 +30,8 @@
 - [OTEL Tracing](#otel-tracing)
 - [Testing](#testing)
 - [Code generation](#code-generation)
+- [Development workflow](#development-workflow)
+- [Cleaning up](#cleaning-up)
 
 ## Why the initial setup was changed
 
