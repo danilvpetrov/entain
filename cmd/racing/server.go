@@ -8,6 +8,7 @@ import (
 
 	racingapi "github.com/danilvpetrov/entain/api/racing"
 	"github.com/danilvpetrov/entain/racing"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 )
 
@@ -21,7 +22,11 @@ func setupServer(
 	ctx context.Context,
 	s *racing.Service,
 ) (*grpc.Server, net.Listener, error) {
-	server := grpc.NewServer()
+	otelServerHdr := otelgrpc.NewServerHandler()
+
+	server := grpc.NewServer(
+		grpc.StatsHandler(otelServerHdr),
+	)
 	racingapi.RegisterRacingServer(server, s)
 
 	if serverAddr == "" {

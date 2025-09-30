@@ -5,7 +5,6 @@ PROTO_GENERATED_FILES += $(foreach f,$(PROTO_FILES:.proto=_grpc.pb.go),$f)
 PROTO_GENERATED_FILES += $(foreach f,$(PROTO_FILES:.proto=.pb.gw.go),$f)
 PROTO_GENERATED_FILES += $(foreach f,$(PROTO_FILES:.proto=.swagger.yaml),$f)
 
-
 %.pb.go: %.proto
 	protoc \
 		--go_out=. \
@@ -47,28 +46,44 @@ test: $(PROTO_GENERATED_FILES)
 .PHONY: generate
 generate: $(PROTO_GENERATED_FILES)
 
-.PHONY: run-gateway
-run-gateway:
-	go run ./cmd/gateway
-
-.PHONY: run-racing
-run-racing:
-	RACING_DB_PATH="artefacts/db/racing.db" go run ./cmd/racing
-
-.PHONY: run-sports
-run-sports:
-	SPORTS_DB_PATH="artefacts/db/sports.db" go run ./cmd/sports
-
-.PHONY: import-sports-events
-import-sports-events:
-	go run ./sports/testdata
-
 .PHONY: precommit
 precommit: test
 	go mod tidy
 	betteralign --apply -test_files ./...
 	golangci-lint run --fix ./...
 
+.PHONY: import-sports-events
+import-sports-events:
+	go run ./sports/testdata
+
+.PHONY: run-gateway
+run-gateway: artefacts/make/docker_jaeger.touch
+	OTLP_TRACE_EXPORTER_ENDPOINT=localhost:4317 \
+	go run ./cmd/gateway
+
+.PHONY: run-racing
+run-racing: artefacts/make/docker_jaeger.touch
+	OTLP_TRACE_EXPORTER_ENDPOINT=localhost:4317 \
+	RACING_DB_PATH="artefacts/db/racing.db" \
+	go run ./cmd/racing
+
+.PHONY: run-sports
+run-sports: artefacts/make/docker_jaeger.touch
+	OTLP_TRACE_EXPORTER_ENDPOINT=localhost:4317 \
+	SPORTS_DB_PATH="artefacts/db/sports.db" \
+	go run ./cmd/sports
+
+artefacts/make/docker_jaeger.touch:
+	@mkdir -p $(@D)
+	docker run --name jaeger \
+		--detach \
+		--env COLLECTOR_OTLP_ENABLED=true \
+		--publish "16686:16686/tcp" \
+		--publish "4317:4317/tcp" \
+		jaegertracing/all-in-one:latest
+	@touch "$@"
+
 clean:
 	rm -rf artefacts
+	docker rm --force jaeger || true
 

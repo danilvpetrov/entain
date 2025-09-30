@@ -300,8 +300,8 @@ func (Event_Status) EnumDescriptor() ([]byte, []int) {
 // ListEventsRequest represents a request for the ListEvents call.
 type ListEventsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// EventTypeId is an optional list of event type IDs to filter the events.
-	EventCategory []Event_Category `protobuf:"varint,1,rep,packed,name=event_category,json=eventCategory,proto3,enum=sports.Event_Category" json:"event_category,omitempty"`
+	// Category is an optional list of event categories to filter the events.
+	Category []Event_Category `protobuf:"varint,1,rep,packed,name=category,proto3,enum=sports.Event_Category" json:"category,omitempty"`
 	// VisibleOnly indicates whether to return only visible events.
 	VisibleOnly bool `protobuf:"varint,2,opt,name=visible_only,json=visibleOnly,proto3" json:"visible_only,omitempty"`
 	// OrderBy specifies the ordering of the returned events.
@@ -340,9 +340,9 @@ func (*ListEventsRequest) Descriptor() ([]byte, []int) {
 	return file_api_sports_sports_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ListEventsRequest) GetEventCategory() []Event_Category {
+func (x *ListEventsRequest) GetCategory() []Event_Category {
 	if x != nil {
-		return x.EventCategory
+		return x.Category
 	}
 	return nil
 }
@@ -556,9 +556,9 @@ var File_api_sports_sports_proto protoreflect.FileDescriptor
 
 const file_api_sports_sports_proto_rawDesc = "" +
 	"\n" +
-	"\x17api/sports/sports.proto\x12\x06sports\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xd7\x02\n" +
-	"\x11ListEventsRequest\x12=\n" +
-	"\x0eevent_category\x18\x01 \x03(\x0e2\x16.sports.Event.CategoryR\reventCategory\x12!\n" +
+	"\x17api/sports/sports.proto\x12\x06sports\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\"\xcc\x02\n" +
+	"\x11ListEventsRequest\x122\n" +
+	"\bcategory\x18\x01 \x03(\x0e2\x16.sports.Event.CategoryR\bcategory\x12!\n" +
 	"\fvisible_only\x18\x02 \x01(\bR\vvisibleOnly\x12<\n" +
 	"\border_by\x18\x03 \x03(\x0e2!.sports.ListEventsRequest.OrderByR\aorderBy\"\xa1\x01\n" +
 	"\aOrderBy\x12\x0f\n" +
@@ -653,7 +653,7 @@ var file_api_sports_sports_proto_goTypes = []any{
 	(*timestamppb.Timestamp)(nil),  // 7: google.protobuf.Timestamp
 }
 var file_api_sports_sports_proto_depIdxs = []int32{
-	1, // 0: sports.ListEventsRequest.event_category:type_name -> sports.Event.Category
+	1, // 0: sports.ListEventsRequest.category:type_name -> sports.Event.Category
 	0, // 1: sports.ListEventsRequest.order_by:type_name -> sports.ListEventsRequest.OrderBy
 	6, // 2: sports.ListEventsResponse.events:type_name -> sports.Event
 	1, // 3: sports.Event.category:type_name -> sports.Event.Category

@@ -8,6 +8,7 @@ import (
 
 	"github.com/danilvpetrov/entain/sports"
 	_ "github.com/mattn/go-sqlite3" // underscore import for the SQLite driver
+	"github.com/uptrace/opentelemetry-go-extra/otelsql"
 )
 
 var (
@@ -26,7 +27,7 @@ func setupDB(ctx context.Context) (*sql.DB, error) {
 		return nil, err
 	}
 
-	db, err := sql.Open("sqlite3", sportsDBPath)
+	db, err := otelsql.Open("sqlite3", sportsDBPath)
 	if err != nil {
 		return nil, err
 	}

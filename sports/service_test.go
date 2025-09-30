@@ -54,7 +54,7 @@ func TestListRaces(t *testing.T) { //nolint:gocognit // Explicit test cases.
 		{
 			name: "filtered by categories",
 			req: &sportsapi.ListEventsRequest{
-				EventCategory: []sportsapi.Event_Category{
+				Category: []sportsapi.Event_Category{
 					sportsapi.Event_BASKETBALL,
 					sportsapi.Event_SOCCER,
 					sportsapi.Event_TENNIS,

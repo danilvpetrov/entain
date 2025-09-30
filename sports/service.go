@@ -151,10 +151,10 @@ func parseFilter(
 ) (filter string, args []any) {
 	var w strings.Builder
 
-	if len(req.GetEventCategory()) > 0 {
+	if len(req.GetCategory()) > 0 {
 		_, _ = w.WriteString(" AND category IN (")
 
-		for i, cat := range req.GetEventCategory() {
+		for i, cat := range req.GetCategory() {
 			_, _ = w.WriteString("?")
 			args = append(
 				args,
@@ -163,7 +163,7 @@ func parseFilter(
 
 			// If it's the last element, close the parenthesis and break.
 			// Otherwise, add a comma.
-			if i == len(req.GetEventCategory())-1 {
+			if i == len(req.GetCategory())-1 {
 				_, _ = w.WriteString(")")
 				break
 			}

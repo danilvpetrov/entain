@@ -26,6 +26,19 @@ func run() error {
 		return fmt.Errorf("error setting up logger: %w", err)
 	}
 
+	shutdown, err := openTelemetry(ctx)
+	if err != nil {
+		return fmt.Errorf("error setting up OpenTelemetry: %w", err)
+	}
+	defer func() {
+		if err := shutdown(); err != nil {
+			slog.Error(
+				"error shutting down OpenTelemetry",
+				slog.Any("error", err),
+			)
+		}
+	}()
+
 	db, err := setupDB(ctx)
 	if err != nil {
 		return fmt.Errorf("error setting up database: %w", err)

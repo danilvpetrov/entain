@@ -6,6 +6,7 @@ import (
 
 	"github.com/danilvpetrov/entain/api/racing"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -22,6 +23,8 @@ func setupRacingService(ctx context.Context, mux *runtime.ServeMux) error {
 		racingServiceAddr = defaultRacingServiceAddr
 	}
 
+	otelClientHdr := otelgrpc.NewClientHandler()
+
 	return racing.RegisterRacingHandlerFromEndpoint(
 		ctx,
 		mux,
@@ -30,6 +33,7 @@ func setupRacingService(ctx context.Context, mux *runtime.ServeMux) error {
 			grpc.WithTransportCredentials(
 				insecure.NewCredentials(),
 			),
+			grpc.WithStatsHandler(otelClientHdr),
 		},
 	)
 }

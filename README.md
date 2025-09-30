@@ -9,6 +9,7 @@
   - [Task 3](#task-3)
   - [Task 4](#task-4)
   - [Task 5](#task-5)
+- [Requirements](#requirements)
 - [API Gateway](#api-gateway)
   - [Running the API Gateway](#running-the-api-gateway)
 - [Racing service](#racing-service)
@@ -19,12 +20,14 @@
     - [Ordering races](#ordering-races)
   - [Getting a specific race](#getting-a-specific-race)
 - [Sports service](#sports-service)
+  - [Importing (seeding) sports events data](#importing-seeding-sports-events-data)
   - [Running sports service](#running-sports-service)
   - [Calling sports service through API Gateway](#calling-sports-service-through-api-gateway)
   - [Listing sport events](#listing-sport-events)
     - [Filtering sport events](#filtering-sport-events)
     - [Ordering sport events](#ordering-sport-events)
   - [Getting a specific sport event](#getting-a-specific-sport-event)
+- [OTEL Tracing](#otel-tracing)
 - [Testing](#testing)
 - [Code generation](#code-generation)
 
@@ -149,6 +152,15 @@ The commits on this branch should be merged into the `main` branch.
 Status: ✅ Completed - The sports service has been implemented with similar
 functionality to the racing service.
 
+## Requirements
+
+- `Go` 1.24+
+- `protoc` Protocol Buffers compiler (see https://protobuf.dev/installation/ for installation instructions)
+- `make` build automation tool
+- `golangci-lint` (for linting, see https://golangci-lint.run/docs/welcome/install/ for installation instructions)
+- `betteralign` (for code alignment, can be installed via `go install github.com/dkorunic/betteralign/cmd/betteralign@latest`)
+- `docker` (for running OpenTelemetry Collector, see https://docs.docker.com/get-docker/ for installation instructions)
+
 ## API Gateway
 
 API Gateway acts as a reverse proxy, routing requests from clients to the
@@ -188,7 +200,7 @@ make run-racing
 The following environment variables can be used to configure the service:
 
 - `LISTEN_ADDR` - address to listen on (default: `localhost:9000`)
-- `RACING_DB_PATH` - path to the racing database (default: `artefacts/racing.db`)
+- `RACING_DB_PATH` - path to the racing database (default: `racing.db`)
 - `DEBUG` - enable debug logging (default: `false`)
 
 ### Calling racing service through API Gateway
@@ -225,7 +237,7 @@ You can also use `visibleOnly` query parameter to filter only visible races. For
 curl -i -X GET "http://localhost:8000/v1/races?visibleOnly=true"
 ```
 
-Please note that that if `visibleOnly` is set to false or not set at all, both
+Please note that if `visibleOnly` is set to false or not set at all, both
 visible and non-visible races will be returned.
 
 #### Ordering races
@@ -272,15 +284,21 @@ Sports service is a microservice that provides sports-related data and
 functionality. The Swagger OpenAPI definitions of the service calls can be found
 [here](./api/sports/sports.swagger.yaml).
 
-### Importing sports events data
+### Importing (seeding) sports events data
 
-To populate the sports database with real events data from Ladbrokes API, you can run:
+There is a sufficient data already collected to seed the sports service
+database. The seed data is located in
+[`sports/testdata/testdata.json`](./sports/testdata/testdata.json) file. All of
+those data were fetched from Ladbrokes API at some point in time in the past and
+now used to populate the sports database. To add more data on top of the
+existing data, you can run the import command below.
 
 ```bash
 make import-sports-events
 ```
 
-This command fetches current in-play sports events and stores them in
+This command fetches current in-play sports events from Ladbrokes API and adds
+them to the existing records in
 [`sports/testdata/testdata.json`](./sports/testdata/testdata.json) file.
 
 ### Running sports service
@@ -294,7 +312,7 @@ make run-sports
 The following environment variables can be used to configure the service:
 
 - `LISTEN_ADDR` - address to listen on (default: `localhost:9010`)
-- `SPORTS_DB_PATH` - path to the sports database (default: `artefacts/sports.db`)
+- `SPORTS_DB_PATH` - path to the sports database (default: `sports.db`)
 - `DEBUG` - enable debug logging (default: `false`)
 
 ### Calling sports service through API Gateway
@@ -361,7 +379,7 @@ You can also use `visibleOnly` query parameter to filter only visible events. Fo
 curl -i -X GET "http://localhost:8000/v1/sports?visibleOnly=true"
 ```
 
-Please note that that if `visibleOnly` is set to false or not set at all, both
+Please note that if `visibleOnly` is set to false or not set at all, both
 visible and non-visible sport events will be returned.
 
 #### Ordering sport events
@@ -400,6 +418,21 @@ curl -i -X GET http://localhost:8000/v1/sports/1
 
 This will return the details of the sport event with ID 1.
 
+## OTEL Tracing
+
+API gateway, racing, and sports services are instrumented with OpenTelemetry
+(OTEL) for distributed tracing and better observability. The services are
+configured to export traces to a OTEL Collector instance using the OTLP protocol
+over gRPC. [Jaeger](https://www.jaegertracing.io) is used both as a OTEL
+Collector and as a frontend for trace visualization. Jaeger starts in a Docker
+container automatically any time you run any of the services through the
+`Makefile` targets `make run-gateway`, `make run-racing`, or `make run-sports`.
+Jaeger UI is accessible at [http://localhost:16686](http://localhost:16686).
+
+Below is a screenshot of Jaeger UI showing traces of a sample request:
+
+![Jaeger UI screenshot](./tracing.png)
+
 ## Testing
 
 To run unit tests of all services, use the following command:
@@ -425,3 +458,12 @@ make precommit
 ```
 
 This command runs code generation, tests, and applies code formatting and linting.
+This command requires `golangci-lint` and `betteralign` tools to be installed.
+
+## Cleaning up
+
+To clean up build artifacts and Docker containers involved in the project, use:
+
+```bash
+make clean
+```

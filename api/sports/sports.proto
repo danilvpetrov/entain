@@ -25,8 +25,8 @@ service Sports {
 
 // ListEventsRequest represents a request for the ListEvents call.
 message ListEventsRequest {
-  // EventTypeId is an optional list of event type IDs to filter the events.
-  repeated Event.Category event_category = 1;
+  // Category is an optional list of event categories to filter the events.
+  repeated Event.Category category = 1;
 
   // VisibleOnly indicates whether to return only visible events.
   bool visible_only = 2;

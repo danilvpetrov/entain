@@ -23,9 +23,9 @@ paths:
           schema:
             $ref: '#/definitions/googlerpcStatus'
       parameters:
-        - name: eventCategory
+        - name: category
           description: |-
-            EventTypeId is an optional list of event type IDs to filter the events.
+            Category is an optional list of event categories to filter the events.
 
              - UNSPECIFIED_CATEGORY: UNSPECIFIED_CATEGORY indicates no specific category.
              - AMERICAN_FOOTBALL: AMERICAN_FOOTBALL represents the American Football category.

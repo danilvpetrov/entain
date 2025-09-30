@@ -8,6 +8,7 @@ import (
 
 	sportsapi "github.com/danilvpetrov/entain/api/sports"
 	"github.com/danilvpetrov/entain/sports"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 )
 
@@ -21,7 +22,11 @@ func setupServer(
 	ctx context.Context,
 	s *sports.Service,
 ) (*grpc.Server, net.Listener, error) {
-	server := grpc.NewServer()
+	otelServerHdr := otelgrpc.NewServerHandler()
+
+	server := grpc.NewServer(
+		grpc.StatsHandler(otelServerHdr),
+	)
 	sportsapi.RegisterSportsServer(server, s)
 
 	if serverAddr == "" {
