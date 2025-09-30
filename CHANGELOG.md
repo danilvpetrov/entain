@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.7.0] - 2025-09-30
+
+### Added
+
+- OTEL tracing support was added for gateway, racing and sports services.
+  The tracing can be enabled by setting the `OTEL_EXPORTER_OTLP_ENDPOINT`
+  environment variable to the desired OTLP collector endpoint. For more details,
+  please refer to [tracing in README.md](./README.md#tracing).
+
 ## [v0.6.0] - 2025-09-29
 
 ### Added
@@ -67,7 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved code structure and organization
 - Added Makefile for building and running the services
 
-[unreleased]: https://github.com/danilvpetrov/entain/compare/v0.6.0...HEAD
+[unreleased]: https://github.com/danilvpetrov/entain/compare/v0.7.0...HEAD
+[v0.7.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.7.0
 [v0.6.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.6.0
 [v0.5.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.5.0
 [v0.4.0]: https://github.com/danilvpetrov/entain/releases/tag/v0.4.0
