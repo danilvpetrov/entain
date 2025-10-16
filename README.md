@@ -1,3 +1,5 @@
+[![Go](https://github.com/danilvpetrov/entain/actions/workflows/go.yml/badge.svg?branch=main&event=push)](https://github.com/danilvpetrov/entain/actions/workflows/go.yml)
+
 # Entain BE Technical Test
 
 ## Table of Contents
